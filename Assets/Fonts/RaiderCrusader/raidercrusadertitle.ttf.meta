@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0eda622d306b95b4da9e19d706278882
+timeCreated: 1504387916
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Raider Crusader Title
+  fontNames:
+  - Raider Crusader Title
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

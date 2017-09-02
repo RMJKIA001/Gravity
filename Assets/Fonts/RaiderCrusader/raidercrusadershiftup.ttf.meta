@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b054c6f1c9d0952459a0cb7b3969d58b
+timeCreated: 1504387916
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Raider Crusader Shift Up
+  fontNames:
+  - Raider Crusader Shift Up
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

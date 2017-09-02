@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ec2412c469d1b244f8bd8221950c5dac
+timeCreated: 1504387917
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Raider Crusader Bevel
+  fontNames:
+  - Raider Crusader Bevel
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
