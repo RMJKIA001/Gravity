@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour {
     public float jumpSpeed = 4;
     public float speed = 5;
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
     }
 	
@@ -47,8 +50,9 @@ public class PlayerController : MonoBehaviour {
         {
             velocity = jumpSpeed;
         }
+    
 
-        Vector3 move = new Vector3(hori * speed, velocity, vert * speed);
+    Vector3 move = new Vector3(hori * speed, velocity, vert * speed);
         cont.Move(transform.rotation * move * Time.deltaTime);
 
     }
