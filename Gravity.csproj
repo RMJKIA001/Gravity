@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\ButtonManager.cs" />
+    <Compile Include="Assets\Scripts\ColourSet.cs" />
     <Compile Include="Assets\Scripts\GunControls.cs" />
     <Compile Include="Assets\Scripts\GunPosition.cs" />
     <Compile Include="Assets\Scripts\HUD.cs" />

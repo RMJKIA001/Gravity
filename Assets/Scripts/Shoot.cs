@@ -5,33 +5,42 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     public float fireRate = 20;
-    private float lightofftime = (float) 0.2;
+    private double lightofftime;
+    private float lightoff;
     public Camera myCamera;
     private float nextFire;
-    private float lightoff;
     public AudioSource soundeffect;
     public GameObject HUD;
     public int bullets;
+    public GameObject lightsource;
+    public int damage;
 
     private void Start()
     {
-      
+        lightsource.SetActive(false);
     }
     
 	void Update ()
     {
         float time = Time.time;
 
+        if (time > lightofftime)
+        {
+            lightsource.SetActive(false);
+        }
+
         if ((Input.GetMouseButtonDown(0)) && (time > nextFire) && (bullets > 0))
         {
+            
             Debug.Log(bullets);
             HUD.GetComponent<HUD>().shoot();
             bullets = bullets - 1;
 
-            lightoff = Time.time + lightofftime;
+            lightsource.SetActive(true);
+
+            lightofftime = Time.time + lightofftime;
 
             Vector3 crosshair = myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
-
 
 
             soundeffect.Play();
@@ -41,12 +50,13 @@ public class Shoot : MonoBehaviour
             {
                 Debug.Log("Hit");
                 nextFire = Time.time + fireRate;
-            
+
+
                 if (hit.collider.GetComponent<Shootable>() != null)
                 {
                     Shootable myObject = hit.collider.GetComponent<Shootable>();
-                    myObject.Hit();
-                    Debug.DrawLine(transform.position, new Vector3(0.5f, 0.5f, 0), Color.red, 10f, true);
+                    myObject.Hit(damage);
+                   // Debug.DrawLine(transform.position, new Vector3(0.5f, 0.5f, 0), Color.red, 10f, true);
                 }
 
              
@@ -55,7 +65,9 @@ public class Shoot : MonoBehaviour
             {
                 Debug.Log("No Hit");
             }
+
             nextFire = Time.time + fireRate;
+            lightofftime = Time.time + 0.1 ;
         }
 
 
