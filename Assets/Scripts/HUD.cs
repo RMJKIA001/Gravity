@@ -6,30 +6,69 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
 
-    private int bullets;
-    private int tBullets;
-    private string gunName;
+    private int used;
+    private int total;
+    private string iname;
 
-	void Start ()
+    void Start()
     {
-        bullets = 20;	
-	}
+    }
 
-    public void updateGun(string name, int x, int totalBullets)
+    public void create(string nme, int x, int tot)
     {
-        bullets = x;
-        tBullets = totalBullets;
-        gunName = name;
+        used = x;
+        total = tot;
+        iname = nme;
 
     }
 
-    public void shoot()
+
+
+    public void decrease(int i)
     {
-        bullets = bullets - 1;
+        used = used - i;
+    }
+    public bool increase(int i, string from)
+    {
+        Debug.Log("Increase");
+        int temp = used + i;
+        if (used >= total)
+        {
+            if (from == "Armor")
+            {
+                if (used == 150)
+                {
+                    return false;
+                }
+
+
+                if (temp > 150)
+                {
+                    used = 150;
+                }
+                else
+                {
+                    used = temp;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        if (temp > total)
+        {
+            used = total;
+        }
+        return true;
+
     }
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        GetComponent<Text>().text = gunName + ": "  + bullets + "/" + tBullets ;
+        GetComponent<Text>().text = iname + ": " + used + "/" + total;
     }
 }

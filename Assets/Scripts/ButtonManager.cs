@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour {
     public GameObject play;
@@ -15,6 +16,17 @@ public class ButtonManager : MonoBehaviour {
     public GameObject join;
     public GameObject create;
     public GameObject back;
+    public Transform ht, s, lg, cg, jg;
+
+    public void Start()
+    {
+        ht.GetComponent<Button>().interactable = false;
+        s.GetComponent<Button>().interactable = false;
+        lg.GetComponent<Button>().interactable = false;
+        cg.GetComponent<Button>().interactable = false;
+        jg.GetComponent<Button>().interactable = false;
+    }
+
     public void Playbtn()
     {
          play.SetActive(false);

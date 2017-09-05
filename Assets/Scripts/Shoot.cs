@@ -14,6 +14,8 @@ public class Shoot : MonoBehaviour
     public int bullets;
     public GameObject lightsource;
     public int damage;
+    public int maxBul;
+    public string type;
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public class Shoot : MonoBehaviour
         {
             
             Debug.Log(bullets);
-            HUD.GetComponent<HUD>().shoot();
+            HUD.GetComponent<HUD>().decrease(1);
             bullets = bullets - 1;
 
             lightsource.SetActive(true);
