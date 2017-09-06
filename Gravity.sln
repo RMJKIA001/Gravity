@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gravity.Plugins", "Gravity.Plugins.csproj", "{D3531DBB-BD12-C08F-3613-34B47342F20E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gravity", "Gravity.csproj", "{BC8F26BC-BE53-4E82-77FC-85D6B64C5311}"

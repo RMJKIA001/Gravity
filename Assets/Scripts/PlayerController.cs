@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     private CharacterController cont;
     private float currCamPosition = 0;
     private bool isRunning = false;
+    private float vert, hori;
 
     public Camera cam;
     public float mouseSensitiviy = 1;
     public float velocity = 0;
     public float jumpSpeed = 4;
     public float speed = 5;
+    public bool ensared = false;
+    public GameObject trappedText;
     // Use this for initialization
     void Start ()
     {
@@ -30,30 +34,40 @@ public class PlayerController : MonoBehaviour {
         float newRot = Mathf.Clamp(currCamPosition, -50, 50);
         cam.transform.localRotation = Quaternion.Euler(newRot, 0, 0);
 
-
-        float vert = Input.GetAxis("Vertical");
-        float hori = Input.GetAxis("Horizontal");
-        velocity += Physics.gravity.y * Time.deltaTime;
-        bool isWalking = (vert != 0 || hori != 0);
-
-        if (Input.GetKey(KeyCode.LeftShift) && isWalking)
+        if(!ensared)
         {
-            vert *= 2f;
-            isRunning = true;
+            vert = Input.GetAxis("Vertical");
+            hori = Input.GetAxis("Horizontal");
+            velocity += Physics.gravity.y * Time.deltaTime;
         }
-        else
+            
+            bool isWalking = (vert != 0 || hori != 0);
+
+            if (Input.GetKey(KeyCode.LeftShift) && isWalking)
+            {
+                vert *= 2f;
+                isRunning = true;
+            }
+            else
+            {
+                isRunning = false;
+            }
+
+            if (Input.GetButtonDown("Jump") && cont.isGrounded)
+            {
+                velocity = jumpSpeed;
+            }
+        
+        if(Input.GetKey(KeyCode.P))
         {
-            isRunning = false;
+            trappedText.GetComponent<Text>().enabled = true;
+            trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
+            ensared = true;
         }
 
-        if (Input.GetButtonDown("Jump") && cont.isGrounded)
-        {
-            velocity = jumpSpeed;
-        }
-    
-
-    Vector3 move = new Vector3(hori * speed, velocity, vert * speed);
+        
+        Vector3 move = new Vector3(hori * speed, velocity, vert * speed);
         cont.Move(transform.rotation * move * Time.deltaTime);
-
+        
     }
 }
