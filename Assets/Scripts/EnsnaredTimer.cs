@@ -21,7 +21,7 @@ public class EnsnaredTimer : MonoBehaviour {
         }
         else
         {
-            GetComponent<Text>().text = "ENSARED\n"+timeLeft + " seconds remaining";
+            GetComponent<Text>().text = "ENSARED\n"+timeLeft.ToString("F2") + " seconds remaining";
         }
 
         

@@ -14,8 +14,8 @@ public class Hunter : MonoBehaviour , IAI{
     private int step = 1;
 
     bool IsAttacking  = false;
-    public Rigidbody Bullet ;
-    public Transform SpawnPoint;
+    public GameObject Bullet ;
+    //public Transform SpawnPoint;
     float fireRate = 7f;
     float nextFire = 0;
 
@@ -29,9 +29,14 @@ public class Hunter : MonoBehaviour , IAI{
             Debug.Log("Attack");//\nAI: " + AIPos.x + " " + AIPos.z + " Player: " + playerPos.x + " " + playerPos.z + " Distance: " + distanceBetweenThem.x + " " + distanceBetweenThem.z);
             AI.transform.LookAt(player.transform);
             nextFire = Time.time + fireRate;
-            SpawnPoint.position = AI.transform.position + new Vector3(1,2,0.55f);
-            var Shoot = Instantiate(Bullet, SpawnPoint.position, SpawnPoint.rotation);
-            Shoot.AddForce(SpawnPoint.up * 500);
+            Bullet.SetActive(true);
+            Bullet.transform.position = AI.transform.position + new Vector3(1,2,0.55f);
+            //var Shoot = Instantiate(Bullet, Bullet.transform.position, Bullet.transform.rotation);
+            Bullet.GetComponent<Rigidbody>().AddForce(Bullet.transform.up * 500);
+        }
+        else
+        {
+            Bullet.SetActive(false);//= false;
         }
     }
 

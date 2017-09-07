@@ -16,9 +16,9 @@ public class PlayerHealth : MonoBehaviour {
         int temp = currhealth + i;
         if (from == "Armor")
         {
-            if (temp > 150)
+            if (temp > 130)
             {
-                currhealth = 150;
+                currhealth = 130;
             }
             else
             {

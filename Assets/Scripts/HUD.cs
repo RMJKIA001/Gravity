@@ -36,15 +36,15 @@ public class HUD : MonoBehaviour
         {
             if (from == "Armor")
             {
-                if (used == 150)
+                if (used == 130)
                 {
                     return false;
                 }
 
 
-                if (temp > 150)
+                if (temp > 130)
                 {
-                    used = 150;
+                    used = 130;
                 }
                 else
                 {
