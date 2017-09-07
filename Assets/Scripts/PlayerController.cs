@@ -34,12 +34,11 @@ public class PlayerController : MonoBehaviour {
         float newRot = Mathf.Clamp(currCamPosition, -50, 50);
         cam.transform.localRotation = Quaternion.Euler(newRot, 0, 0);
 
-        if(!ensared)
-        {
+        
             vert = Input.GetAxis("Vertical");
             hori = Input.GetAxis("Horizontal");
             velocity += Physics.gravity.y * Time.deltaTime;
-        }
+        
             
             bool isWalking = (vert != 0 || hori != 0);
 
@@ -64,9 +63,15 @@ public class PlayerController : MonoBehaviour {
             trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
             ensared = true;
         }
-
-        
-        Vector3 move = new Vector3(hori * speed, velocity, vert * speed);
+        Vector3 move;
+        if (!ensared)
+        {
+            move = new Vector3(hori * speed, velocity, vert * speed);
+        }
+        else
+        {
+            move = new Vector3(0, 0, 0);
+        }
         cont.Move(transform.rotation * move * Time.deltaTime);
         
     }

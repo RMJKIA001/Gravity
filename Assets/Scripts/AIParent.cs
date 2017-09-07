@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class AIParent : MonoBehaviour
 {
@@ -12,8 +9,8 @@ public class AIParent : MonoBehaviour
     public int distance;
     public GameObject AI;
     bool right = true;
-
-
+    bool turn = false;
+    private int step = 1;
     // Use this for initialization
     void Start ()
     {
@@ -35,10 +32,12 @@ public class AIParent : MonoBehaviour
             travelled = travelled - speed;
         }
 
+        
         if (AI.transform.position.z > 50)
         {
             right = false;
             AI.transform.rotation = new Quaternion(0, 180, 0, 0);
+            Step();
         }
 
 
@@ -46,17 +45,35 @@ public class AIParent : MonoBehaviour
         {
             right = true;
             AI.transform.rotation = new Quaternion(0, 0, 0, 0);
+            Step();
         }
 
 
 
 
     }
-
-    public void Attack()
+    void Step()
     {
+        Vector3 otherPosn = AI.transform.position;
+        if (turn)
+        {
+            AI.transform.position = new Vector3(otherPosn.x + step, otherPosn.y, otherPosn.z);
+        }
+        else
+        {
+            AI.transform.position = new Vector3(otherPosn.x - step, otherPosn.y, otherPosn.z);
+        }
 
+        if (AI.transform.position.x > 70)
+        {
+            turn = false;
+        }
+        if (AI.transform.position.x < 50)
+        {
+            turn = true;
+        }
     }
+
 
 	// Update is called once per frame
 	void FixedUpdate ()
