@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float jumpSpeed = 4;
     public float speed = 5;
     public bool ensared = false;
-    public GameObject trappedText;
+    
     // Use this for initialization
     void Start ()
     {
@@ -57,12 +57,7 @@ public class PlayerController : MonoBehaviour {
                 velocity = jumpSpeed;
             }
         
-        if(Input.GetKey(KeyCode.P))
-        {
-            trappedText.GetComponent<Text>().enabled = true;
-            trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
-            ensared = true;
-        }
+        
         Vector3 move;
         if (!ensared)
         {

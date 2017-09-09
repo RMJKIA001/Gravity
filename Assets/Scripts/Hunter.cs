@@ -18,26 +18,32 @@ public class Hunter : MonoBehaviour , IAI{
     //public Transform SpawnPoint;
     float fireRate = 7f;
     float nextFire = 0;
+    public float bulletTime = 50f;
+    public float disableBullet = 0;
 
     public void Attack()
     {
-       // Vector3 playerPos = player.transform.position;
-        //Vector3 AIPos = AI.transform.position;
+         System.Random rnd = new System.Random();
+         if (Time.time > nextFire && IsAttacking)
+         {
+             Debug.Log("Attack");
+             AI.transform.LookAt(player.transform);
+             nextFire = Time.time + fireRate;
+             disableBullet = Time.time + bulletTime;
+             Bullet.transform.position = player.transform.position  +  new Vector3(rnd.Next(1),rnd.Next(1),rnd.Next(1));
+             if (AI.transform.position.z > 50)
+             {
+                AI.transform.rotation = new Quaternion(0, 180, 0, 0);
+             }
 
-        if (Time.time > nextFire)
-        {
-            Debug.Log("Attack");//\nAI: " + AIPos.x + " " + AIPos.z + " Player: " + playerPos.x + " " + playerPos.z + " Distance: " + distanceBetweenThem.x + " " + distanceBetweenThem.z);
-            AI.transform.LookAt(player.transform);
-            nextFire = Time.time + fireRate;
-            Bullet.SetActive(true);
-            Bullet.transform.position = AI.transform.position + new Vector3(1,2,0.55f);
-            //var Shoot = Instantiate(Bullet, Bullet.transform.position, Bullet.transform.rotation);
-            Bullet.GetComponent<Rigidbody>().AddForce(Bullet.transform.up * 500);
+
+             if (AI.transform.position.z < 38)
+             {
+                 AI.transform.rotation = new Quaternion(0, 0, 0, 0);
+             }
+
         }
-        else
-        {
-            Bullet.SetActive(false);//= false;
-        }
+    
     }
 
     public void Roam()
@@ -111,6 +117,8 @@ public class Hunter : MonoBehaviour , IAI{
         
         Roam();
         Hunt();
+        Attack();
+        
     }
 
     void Hunt()
@@ -118,9 +126,13 @@ public class Hunter : MonoBehaviour , IAI{
         Vector3 playerPos = player.transform.position;
         Vector3 AIPos = AI.transform.position;
         Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
-        if ((distanceBetweenThem.x <4 && distanceBetweenThem.x >-4) && (distanceBetweenThem.z<4 && distanceBetweenThem.z>-4)  )
+        if ((distanceBetweenThem.x <5 && distanceBetweenThem.x >-5) && (distanceBetweenThem.z<5 && distanceBetweenThem.z>-5)  )
         {
-            Attack();
+            IsAttacking = true;
+        }
+        else
+        {
+            IsAttacking = false;
         }
     }
 }
