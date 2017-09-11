@@ -8,6 +8,9 @@ public class Collectable : MonoBehaviour {
     public string type;
     public GameObject HUD;
     public GameObject player;
+    public AudioSource ammoEffect;
+    public AudioSource healthEffect;
+    public AudioSource armourEffect;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,10 +25,20 @@ public class Collectable : MonoBehaviour {
                 if (type == "Health" || type == "Armor")
                 {
                     player.GetComponent<PlayerHealth>().increase(value,type);
+
+                    if (type == "Health")
+                    {
+                        healthEffect.Play();
+                    }
+                    else
+                    {
+                        armourEffect.Play();
+                    }
                 }
                 else
                 {
                     player.GetComponent<GunControls>().active.GetComponent<Shoot>().bullets = player.GetComponent<GunControls>().active.GetComponent<Shoot>().maxBul;
+                    ammoEffect.Play();
                 }
             }
         }

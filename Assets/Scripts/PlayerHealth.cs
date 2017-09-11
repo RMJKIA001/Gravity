@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
     public int currhealth = 50;
     public GameObject HUD;
     public GameObject dead;
+    public GameObject ensnaredText;
+    public GameObject gunText;
+    public GameObject deadtext;
+
     // Use this for initialization
-    void Start () {
-		
+    void Start ()
+    {
+        deadtext.SetActive(false);
 	}
 
     public void increase(int i , string from)
@@ -46,7 +52,12 @@ public class PlayerHealth : MonoBehaviour {
         {
             //dead
             dead.SetActive(true);
-            GetComponent<PlayerController>().enabled = true;
+            HUD.SetActive(false);
+            gunText.SetActive(false);
+            ensnaredText.SetActive(false);
+            deadtext.SetActive(true);
+            transform.position = new Vector3(-1000, -1000, -1000);
+            GetComponent<PlayerController>().enabled = false;
         }
         currhealth = temp;
     }

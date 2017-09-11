@@ -13,6 +13,7 @@ public class GunControls : MonoBehaviour {
     void Start ()
     {
         HUD.GetComponent<HUD>().create("Shotgun", 10, 10);
+        gun2.SetActive(true);
         active = gun1;
     }
 	

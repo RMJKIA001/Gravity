@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Bullet : MonoBehaviour {
     public GameObject trappedText;
     public GameObject player;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag=="Player")

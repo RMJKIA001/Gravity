@@ -5,12 +5,11 @@ using UnityEngine;
 public class Shootable : MonoBehaviour
 {
     private int totalhealth = 100;
-    private int currenthealth;
+    public int currenthealth;
     public  GameObject healthbar;
 
     private void Start()
     {
-        currenthealth = 100;
         healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
     }
 

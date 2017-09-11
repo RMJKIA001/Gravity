@@ -56,8 +56,43 @@ public class PlayerController : MonoBehaviour {
             {
                 velocity = jumpSpeed;
             }
-        
-        
+
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                jumpSpeed = 4;
+
+                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
+
+                foreach (GameObject platform in platforms)
+                {
+                 platform.GetComponent<GravityControl>().setGravity(false);
+                }
+        }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                jumpSpeed = 10;
+
+                GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
+
+                foreach (GameObject platform in platforms)
+                {
+                    platform.GetComponent<GravityControl>().setGravity(false);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                jumpSpeed = 4;
+                GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
+
+                foreach (GameObject platform in platforms)
+                {
+                   platform.GetComponent<GravityControl>().setGravity(true);
+                }
+
+        }
+
+
         Vector3 move;
         if (!ensared)
         {

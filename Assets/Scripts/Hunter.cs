@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hunter : MonoBehaviour , IAI{
+public class Hunter : MonoBehaviour , IAI
+{
     public float speed;
     public float travelled = 0;
     public int distance;
     public GameObject AI;
     public GameObject player;
+
     bool right = true;
     bool turn = false;
     private int step = 1;
@@ -20,6 +22,7 @@ public class Hunter : MonoBehaviour , IAI{
     float nextFire = 0;
     public float bulletTime = 50f;
     public float disableBullet = 0;
+    public AudioSource trappedeffect;
 
     public void Attack()
     {
@@ -31,6 +34,7 @@ public class Hunter : MonoBehaviour , IAI{
              nextFire = Time.time + fireRate;
              disableBullet = Time.time + bulletTime;
              Bullet.transform.position = player.transform.position  +  new Vector3(rnd.Next(1),rnd.Next(1),rnd.Next(1));
+
              if (AI.transform.position.z > 50)
              {
                 AI.transform.rotation = new Quaternion(0, 180, 0, 0);
@@ -113,7 +117,8 @@ public class Hunter : MonoBehaviour , IAI{
     
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         
         Roam();
         Hunt();

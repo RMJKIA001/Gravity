@@ -12,7 +12,8 @@ public class EnsnaredTimer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
