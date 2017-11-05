@@ -19,9 +19,13 @@ public class Shoot : MonoBehaviour
     private float nextFire;
     public Animator ani;
     public Transform hand;
+    private LineRenderer linedraw;
+    public Transform barrel;
+
     private void Start()
     {
         lightsource.SetActive(false);
+        linedraw = GetComponent<LineRenderer>();
         
     }
 	void Update ()
@@ -34,6 +38,7 @@ public class Shoot : MonoBehaviour
         if (time > lightofftime)
         {
             lightsource.SetActive(false);
+            linedraw.enabled = false;
         }
 
         if ((Input.GetMouseButtonDown(0)) && (time > nextFire) && (bullets > 0))
@@ -50,10 +55,16 @@ public class Shoot : MonoBehaviour
             Vector3 crosshair = myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //middle of the screen
             RaycastHit hit;
 
+            linedraw.enabled = true;
+            linedraw.SetPosition(0, barrel.position);
+
             if (Physics.Raycast(crosshair, myCamera.transform.forward, out hit, 500))
             {
                 //Debug.Log("Hit");
                 nextFire = Time.time + fireRate;
+
+                linedraw.SetPosition(1, hit.point);
+
                 if (hit.collider.GetComponent<Shootable>() != null)
                 {
                     Shootable myObject = hit.collider.GetComponent<Shootable>();
@@ -64,6 +75,7 @@ public class Shoot : MonoBehaviour
 
             nextFire = Time.time + fireRate;
             lightofftime = Time.time + 0.1 ;
+          
         }
     }
 }
