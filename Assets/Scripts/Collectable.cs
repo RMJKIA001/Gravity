@@ -21,7 +21,7 @@ public class Collectable : Photon.MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameObject playerObj= other.gameObject;
-            
+            effect.Play();
             if (type == "ShotGun" || type == "LazerGun")
             {
                 if(!GunEnabled)
