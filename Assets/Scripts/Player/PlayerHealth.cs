@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     public GameObject ensnaredText;
     public GameObject gunText;
     public GameObject deadtext;
+    public GameObject exit;
+    public GameObject back;
 
     // Use this for initialization
     void Start()
@@ -51,13 +53,7 @@ public class PlayerHealth : MonoBehaviour
         if (temp <= 0)
         {
             //dead
-            dead.SetActive(true);
-            HUD.SetActive(false);
-            gunText.SetActive(false);
-            ensnaredText.SetActive(false);
-            deadtext.SetActive(true);
-            transform.position = new Vector3(-1000, -1000, -1000);
-            GetComponent<PlayerController>().enabled = false;
+            Dead();
         }
         currhealth = temp;
     }
@@ -70,7 +66,37 @@ public class PlayerHealth : MonoBehaviour
 
         if (transform.position.y < -50)
         {
-            //dead
+            Dead();
+            
+        }
+
+    }
+    void Dead()
+    {
+        //dead
+        if (PhotonNetwork.connected)
+        {
+            if (GetComponentInParent<PhotonView>().isMine)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                back.SetActive(true);
+                exit.SetActive(true);
+                dead.SetActive(true);
+                HUD.SetActive(false);
+                gunText.SetActive(false);
+                ensnaredText.SetActive(false);
+                deadtext.SetActive(true);
+                transform.position = new Vector3(-1000, -1000, -1000);
+                GetComponent<PlayerController>().enabled = false;
+            }
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            back.SetActive(true);
+            exit.SetActive(true);
             dead.SetActive(true);
             HUD.SetActive(false);
             gunText.SetActive(false);
@@ -79,6 +105,5 @@ public class PlayerHealth : MonoBehaviour
             transform.position = new Vector3(-1000, -1000, -1000);
             GetComponent<PlayerController>().enabled = false;
         }
-
     }
 }

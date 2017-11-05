@@ -18,8 +18,8 @@ public class PlayerController : Photon.MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         ani = GetComponent<Animator>();
     }
@@ -52,8 +52,9 @@ public class PlayerController : Photon.MonoBehaviour {
         if (Input.GetButtonDown("Jump") && cont.isGrounded)
         {
             velocity = jumpSpeed;
-            if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All,"Jump"); }
-            else { ani.SetTrigger("Jump"); }
+            if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All,"Jump"); }
+            else {
+                ani.SetTrigger("Jump"); }
             
         }
        
@@ -157,7 +158,14 @@ public class PlayerController : Photon.MonoBehaviour {
     [PunRPC]
     void Trigger(string x)
     {
-        ani.SetTrigger(x);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in players)
+        {
+            if(y.GetPhotonView() == this.photonView)
+            y.GetComponent<Animator>().SetTrigger(x);  
+        }
+
+        
     }
 }
 

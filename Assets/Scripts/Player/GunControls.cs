@@ -65,6 +65,7 @@ public class GunControls : MonoBehaviour {
             {
                 gun1.SetActive(true);
                 gun2.SetActive(false);
+                //GetComponent<NetworkPlayer>().shot.SetActive(true);
                 active = gun1;
             }
             else if(lazerGun)

@@ -21,6 +21,7 @@ public class Shoot : MonoBehaviour
     public Transform hand;
     private LineRenderer linedraw;
     public Transform barrel;
+    public PhotonView photonView;
 
     private void Start()
     {
@@ -32,7 +33,9 @@ public class Shoot : MonoBehaviour
     {
         //transform.up = hand.up;
         //transform.right = hand.right;
-        transform.position = hand.position;
+        
+            transform.position = hand.position;
+        
         float time = Time.time;
 
         if (time > lightofftime)
@@ -43,7 +46,9 @@ public class Shoot : MonoBehaviour
 
         if ((Input.GetMouseButtonDown(0)) && (time > nextFire) && (bullets > 0))
         {
-            ani.SetTrigger("Shoot");
+            if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All, "Shoot"); }
+            else { ani.SetTrigger("Shoot"); }
+            
             //Debug.Log(bullets);
             HUD.GetComponent<HUD>().decrease(1);
             bullets = bullets - 1;
@@ -77,5 +82,17 @@ public class Shoot : MonoBehaviour
             lightofftime = Time.time + 0.1 ;
           
         }
+    }
+    [PunRPC]
+    void Trigger(string x)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in players)
+        {
+            if (y.GetPhotonView() == this.photonView)
+                y.GetComponent<Animator>().SetTrigger(x);
+        }
+
+
     }
 }

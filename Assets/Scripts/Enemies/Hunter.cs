@@ -50,9 +50,10 @@ public class Hunter :   MonoBehaviour , IAI
             }
         }
         player = closestPlayer;
-       // Bullet.GetComponent<Bullet>().setPlayer(player);
-        trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
-
+        // Bullet.GetComponent<Bullet>().setPlayer(player);
+        
+            trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
+        
     }
     void FixedUpdate()
     {

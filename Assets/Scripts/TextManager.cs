@@ -16,5 +16,9 @@ public class TextManager : MonoBehaviour
         {
             SceneManager.LoadScene("CapstoneSinglePlayer");
         }
+        if(Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene("CapstoneSinglePlayer");
+        }
 	}
 }

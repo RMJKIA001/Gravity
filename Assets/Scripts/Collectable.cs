@@ -34,6 +34,7 @@ public class Collectable : Photon.MonoBehaviour
                     if(playerObj.GetComponent<GunControls>().shotGun==false)
                     {
                         playerObj.GetComponent<GunControls>().shotGun = true;
+
                         if (playerObj.GetComponent<GunControls>().lazerGun)
                         {
                             playerObj.GetComponent<GunControls>().moreThanOne = true;

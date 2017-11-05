@@ -5,10 +5,12 @@ using UnityEngine;
 public class NetworkPlayer : Photon.MonoBehaviour {
     public GameObject myCamera;
     public GameObject canvas;
-	
+    public GameObject shot,laz;
+
 	void Start () {
+        
         //so that you only control yourself and not the other people in the network
-        if(photonView.isMine)
+        if(GetComponent<PhotonView>().isMine)
         {
             myCamera.SetActive(true);
             canvas.SetActive(true);
@@ -17,6 +19,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<GunControls>().enabled = true;
             GetComponent<PlayerHealth>().enabled = true;
+            //GetComponent<Animator>().enabled = true;
         }
         //because prefab starts of with these features disabled
         if((!PhotonNetwork.connected))
@@ -27,6 +30,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<GunControls>().enabled = true;
             GetComponent<PlayerHealth>().enabled = true;
+            //GetComponent<Animator>().enabled = true;
         }
         
     }
