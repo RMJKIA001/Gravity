@@ -17,8 +17,8 @@ public class PlayerController : Photon.MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //Cursor.visible = false;
-       // Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         ani = GetComponent<Animator>();
     }

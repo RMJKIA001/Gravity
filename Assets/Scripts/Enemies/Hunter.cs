@@ -63,6 +63,9 @@ public class Hunter : MonoBehaviour , IAI
          if (Time.time > nextFire && IsAttacking)
          {
                 nextFire = Time.time + fireRate;
+            trappedeffect.time = 2f;
+            trappedeffect.Play();
+            GetComponent<Animator>().SetTrigger("Ens");
                // Debug.Log("Hit Player");
                 if (PhotonNetwork.connected)
                 {

@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
         if(iname=="Health" && used>100)
         {
             GetComponent<Text>().color = Color.yellow;
-            Debug.Log("yellow");
+            //Debug.Log("yellow");
         }
         else
         {

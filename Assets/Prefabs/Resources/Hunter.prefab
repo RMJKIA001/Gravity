@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114389909007902258}
   - component: {fileID: 114397240347906196}
   - component: {fileID: 114446035309613676}
+  - component: {fileID: 95830311632371052}
   m_Layer: 0
   m_Name: Hunter
   m_TagString: Enemy
@@ -1285,7 +1286,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009454136660302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.54, y: 1.68, z: 38.02}
+  m_LocalPosition: {x: 144.57, y: 1, z: 46.69}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4140890986535678}
@@ -1786,6 +1787,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95830311632371052
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1009454136660302}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2b2c59923c4cd8e43a45f2417c1cfa9e, type: 3}
+  m_Controller: {fileID: 9100000, guid: 148cf8367546b2040936495b3c3ea9f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &102443024342357726
 TextMesh:
   serializedVersion: 3
@@ -1813,7 +1831,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009454136660302}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400002, guid: 4d4e7cd8d87d98a46870cedb702d5e22, type: 3}
   m_Animations:
@@ -1855,7 +1873,11 @@ MonoBehaviour:
   Bullet: {fileID: 1389101301960884}
   bulletTime: 10
   disableBullet: 0
-  trappedeffect: {fileID: 82586463116051870}
+  trappedeffect: {fileID: 0}
+  x1: 60
+  x2: 46
+  x3: 144
+  x4: 150
   trappedText: {fileID: 0}
 --- !u!114 &114446035309613676
 MonoBehaviour:

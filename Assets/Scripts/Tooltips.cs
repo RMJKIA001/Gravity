@@ -7,13 +7,11 @@ using UnityEngine.UI;
 public class Tooltips : MonoBehaviour
 {
     public GameObject player;
-
     // Update is called once per frame
     //checks the position of the player, if in range of specific items then display the tip
     void Update ()
     {
         Transform mytransform = player.GetComponent<Transform>();
-
         if (mytransform.position.z > 10 && mytransform.position.z < 20 && mytransform.position.x > 3 && mytransform.position.x < 10)
         {
             GetComponent<Text>().text = "You can pick up weapons by walking over them.";
@@ -30,9 +28,9 @@ public class Tooltips : MonoBehaviour
         {
             GetComponent<Text>().text = "Press 3 to manipulate the gravity of platforms.";
         }
-        else if (mytransform.position.z > 45 && mytransform.position.z < 55 && mytransform.position.x > 24 && mytransform.position.x < 30 && mytransform.position.y > 5)
+        else if (mytransform.position.z > 45 && mytransform.position.z < 55 && mytransform.position.x > 24 && mytransform.position.x < 30)
         {
-            GetComponent<Text>().text = "Left click to shoot enemies";
+            GetComponent<Text>().text = "Left click to shoot enemies.";
         }
         else if (mytransform.position.x > 30 && mytransform.position.x < 35)
         {

@@ -99,10 +99,10 @@ public class Collectable : Photon.MonoBehaviour
 
                 if (possible)
                 {
-                    Debug.Log("befor: "+ effect+" "+ effect.isPlaying);
+                    //Debug.Log("befor: "+ effect+" "+ effect.isPlaying);
                     //gameObject.GetComponent<AudioSource>().Play();
                     effect.Play();
-                    Debug.Log("After: "+effect + " " + effect.isPlaying);
+                    //Debug.Log("After: "+effect + " " + effect.isPlaying);
                     particleEffect.transform.position = this.transform.position;
                     pref = gameObject.tag + "Particle";
                     if (PhotonNetwork.connected) { photonView.RPC("DestObj", PhotonTargets.MasterClient, photonView.viewID, gameObject.tag ,pref); }
