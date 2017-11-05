@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Hunter : MonoBehaviour , IAI
+public class Hunter :   MonoBehaviour , IAI
 {
     public float speed;
     public float travelled = 0;
@@ -17,7 +17,7 @@ public class Hunter : MonoBehaviour , IAI
     private int step = 1;
 
     bool IsAttacking  = false;
-    public GameObject Bullet ;
+    //public GameObject Bullet ;
     float fireRate = 7f;
     float nextFire = 0;
     public float bulletTime = 50f;
@@ -50,7 +50,7 @@ public class Hunter : MonoBehaviour , IAI
             }
         }
         player = closestPlayer;
-        Bullet.GetComponent<Bullet>().setPlayer(player);
+       // Bullet.GetComponent<Bullet>().setPlayer(player);
         trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
 
     }
@@ -65,7 +65,12 @@ public class Hunter : MonoBehaviour , IAI
                 nextFire = Time.time + fireRate;
             trappedeffect.time = 2f;
             trappedeffect.Play();
-            GetComponent<Animator>().SetTrigger("Ens");
+            GetComponent<ParticleSystem>().Emit(50);
+            if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
+            else
+            {
+                GetComponent<Animator>().SetTrigger("Ens");
+            }
                // Debug.Log("Hit Player");
                 if (PhotonNetwork.connected)
                 {
@@ -184,4 +189,11 @@ public class Hunter : MonoBehaviour , IAI
             IsAttacking = false;
         }
     }
+    [PunRPC]
+    void Trigger(string x)
+    {
+        GetComponent<Animator>().SetTrigger(x);
+    }
 }
+
+

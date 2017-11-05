@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114397240347906196}
   - component: {fileID: 114446035309613676}
   - component: {fileID: 95830311632371052}
+  - component: {fileID: 114570834046582338}
   m_Layer: 0
   m_Name: Hunter
   m_TagString: Enemy
@@ -1905,6 +1906,26 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114570834046582338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1009454136660302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 0
+    Name: Ens
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!114 &114779132381902974
 MonoBehaviour:
   m_ObjectHideFlags: 1

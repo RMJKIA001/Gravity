@@ -14,6 +14,7 @@ public class PlayerController : Photon.MonoBehaviour {
     public float jumpSpeed = 4;
     public float speed = 5;
     public bool ensared = false;
+    private bool gun;
     // Use this for initialization
     void Start ()
     {
@@ -38,9 +39,11 @@ public class PlayerController : Photon.MonoBehaviour {
         vert = Input.GetAxis("Vertical");
         hori = Input.GetAxis("Horizontal");
         velocity += Physics.gravity.y * Time.deltaTime;
+        ani.SetBool( "Gun",GetComponent<GunControls>().shotGun || GetComponent<GunControls>().lazerGun);
         
         bool isWalking = (vert != 0 || hori != 0);
         ani.SetBool("Walking", isWalking);
+       
         if (Input.GetKey(KeyCode.LeftShift) && isWalking)
         {
             vert *= 2f;
@@ -49,7 +52,9 @@ public class PlayerController : Photon.MonoBehaviour {
         if (Input.GetButtonDown("Jump") && cont.isGrounded)
         {
             velocity = jumpSpeed;
-            ani.SetTrigger("Jump");
+            if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All,"Jump"); }
+            else { ani.SetTrigger("Jump"); }
+            
         }
        
 
@@ -106,12 +111,12 @@ public class PlayerController : Photon.MonoBehaviour {
         }
         else
         {
-            /*if(PhotonNetwork.connected)
+            if (PhotonNetwork.connected)
             {
                 GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
-                foreach(GameObject y in x)
+                foreach (GameObject y in x)
                 {
-                    if(y.Equals(this))
+                    if (y.Equals(this))
                     {
 
                     }
@@ -127,9 +132,12 @@ public class PlayerController : Photon.MonoBehaviour {
                     }
 
                 }
-            }*/
+            }
             move = new Vector3(0, 0, 0);
-            ani.SetTrigger("Idle");
+            if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All,"Idle"); }
+            else{   ani.SetTrigger("Idle");
+        }
+           
         }
         cont.Move(transform.rotation * move * Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.Escape)) { Application.Quit();}
@@ -144,6 +152,12 @@ public class PlayerController : Photon.MonoBehaviour {
             y.GetComponent<GravityControl>().setGravity(grav);
      
         }
+    }
+    //ani.SetTrigger("Jump"); 
+    [PunRPC]
+    void Trigger(string x)
+    {
+        ani.SetTrigger(x);
     }
 }
 

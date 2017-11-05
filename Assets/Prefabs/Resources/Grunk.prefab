@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 65873965341401956}
   - component: {fileID: 114852513355044284}
   - component: {fileID: 114136857702813360}
+  - component: {fileID: 95947836929579714}
   m_Layer: 0
   m_Name: Grunk
   m_TagString: Enemy
@@ -1628,6 +1629,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 15, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95947836929579714
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1649475100385364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2b2c59923c4cd8e43a45f2417c1cfa9e, type: 3}
+  m_Controller: {fileID: 9100000, guid: 753d7e7c3b4ee71418db0831ad1b9244, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!102 &102094681264864620
 TextMesh:
   serializedVersion: 3
@@ -1655,7 +1673,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1649475100385364}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400002, guid: 4d4e7cd8d87d98a46870cedb702d5e22, type: 3}
   m_Animations:

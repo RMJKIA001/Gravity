@@ -40,4 +40,5 @@ MonoBehaviour:
   - MoveObj
   - updateHealth
   - kill
+  - Trigger
   DisableAutoOpenWizard: 1
