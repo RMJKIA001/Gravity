@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Hunter :   MonoBehaviour , IAI
 {
@@ -25,11 +26,21 @@ public class Hunter :   MonoBehaviour , IAI
     public AudioSource trappedeffect;
     public ParticleSystem particles;
 
+    public int range;
+
     public int x1;
     public int x2;
     public int x3;
     public int x4;
     public GameObject trappedText;
+
+    private NavMeshAgent nav;
+
+    private void Start()
+    {
+        nav = GetComponent<NavMeshAgent>();
+    }
+
  
     //find the closeset player
     void Find()
@@ -70,34 +81,44 @@ public class Hunter :   MonoBehaviour , IAI
         {
             if (Time.time > nextFire)
             {
-                nextFire = Time.time + fireRate;
-                trappedeffect.time = 2f;
-                trappedeffect.Play();
-                particles.Emit(50);
+                var RayDirection = player.transform.position - transform.position;
+                RaycastHit hit;
 
-                if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
-                else
+                if (Physics.Raycast(transform.position, RayDirection, out hit, 500))
                 {
-                    GetComponent<Animator>().SetTrigger("Ens");
-                }
-                // Debug.Log("Hit Player");
-                if (PhotonNetwork.connected)
-                {
-                    if (player.GetPhotonView().isMine)
+                    if (hit.transform == player.transform)
                     {
-                        trappedText.GetComponent<Text>().enabled = true;
-                        trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
+                        nextFire = Time.time + fireRate;
+                        trappedeffect.time = 2f;
+                        trappedeffect.Play();
+                        particles.Emit(50);
+
+                        if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
+                        else
+                        {
+                            GetComponent<Animator>().SetTrigger("Ens");
+                        }
+                        // Debug.Log("Hit Player");
+                        if (PhotonNetwork.connected)
+                        {
+                            if (player.GetPhotonView().isMine)
+                            {
+                                trappedText.GetComponent<Text>().enabled = true;
+                                trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
+                            }
+                            player.GetComponent<PlayerController>().ensared = true;
+                            player.GetComponent<PlayerHealth>().Decrease(10);
+                        }
+                        else
+                        {
+                            trappedText.GetComponent<Text>().enabled = true;
+                            trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
+                            player.GetComponent<PlayerController>().ensared = true;
+                            player.GetComponent<PlayerHealth>().Decrease(10);
+                        }
                     }
-                    player.GetComponent<PlayerController>().ensared = true;
-                    player.GetComponent<PlayerHealth>().Decrease(10);
                 }
-                else
-                {
-                    trappedText.GetComponent<Text>().enabled = true;
-                    trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
-                    player.GetComponent<PlayerController>().ensared = true;
-                    player.GetComponent<PlayerHealth>().Decrease(10);
-                }
+
             }
         }
            
@@ -177,9 +198,23 @@ public class Hunter :   MonoBehaviour , IAI
 	
 	// Update is called once per frame
 	void Update ()
-    {   
+    {
         //Roam();
-       // Hunt();
+        // Hunt();
+        var distance = Vector3.Distance(player.transform.position, transform.position);
+
+        if (distance <= range)
+        {
+            nav.enabled = true;
+            nav.SetDestination(player.transform.position);
+        }
+
+        else
+        {
+            this.nav.enabled = false;
+
+        }
+
         Attack();
         
     }

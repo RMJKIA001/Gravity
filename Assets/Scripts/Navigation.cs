@@ -16,6 +16,32 @@ public class Navigation : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        Find();
         agent.SetDestination(target.transform.position);
 	}
+
+    void Find()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject closestPlayer = null;
+        float distance = Mathf.Infinity;
+
+        foreach (GameObject p in players)
+        {
+            //calculate distance Between  player and AI
+            Vector3 difference = transform.position - p.transform.position;
+            float distanceBetween = difference.sqrMagnitude;
+            if (distanceBetween < distance)
+            {
+                closestPlayer = p;
+                distance = distanceBetween;
+            }
+        }
+        target = closestPlayer;
+        // Bullet.GetComponent<Bullet>().setPlayer(player);
+
+        //trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
+
+    }
 }

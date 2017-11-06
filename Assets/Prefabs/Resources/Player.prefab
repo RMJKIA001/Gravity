@@ -1960,7 +1960,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205337780724546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 231.47, y: 4.5, z: 53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4788436515285820}
@@ -2868,7 +2868,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 0.01
   m_Drag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3515,6 +3515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a9803657d2ba4daa2bc9a7b5e1fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLeft: 0
+  dead: {fileID: 1436677134451624}
 --- !u!114 &114254629689033914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3533,7 +3535,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205337780724546}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d275e2af82e020e4c9a638d3313f965c, type: 3}
   m_Name: 
@@ -3858,7 +3860,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205337780724546}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b248bd77a52605546aab64bdfa4dcf99, type: 3}
   m_Name: 
@@ -3866,7 +3868,7 @@ MonoBehaviour:
   cam: {fileID: 20776469354720594}
   mouseSensitiviy: 1
   velocity: 0
-  jumpSpeed: 4
+  jumpSpeed: 8
   speed: 5
   ensared: 0
 --- !u!114 &114674032253622086
@@ -4039,7 +4041,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205337780724546}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fd1b3791dda7cc4b9fa3c1004871a62, type: 3}
   m_Name: 
@@ -4117,7 +4119,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Back
+  m_Text: Retry
 --- !u!114 &114973486799552980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4371,7 +4373,7 @@ LineRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295339172175424}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 0

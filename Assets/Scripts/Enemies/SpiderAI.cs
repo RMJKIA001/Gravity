@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpiderAI : MonoBehaviour, IAI {
 
@@ -14,6 +15,14 @@ public class SpiderAI : MonoBehaviour, IAI {
     float checkTime;
     float checkTime2;
     public AudioSource bite;
+    public int range;
+
+    private NavMeshAgent nav;
+
+    private void Start()
+    {
+        nav = GetComponent<NavMeshAgent>();
+    }
 
     //find closest player
     void Find()
@@ -108,6 +117,19 @@ public class SpiderAI : MonoBehaviour, IAI {
     // Update is called once per frame
     void Update()
     {
+        var distance = Vector3.Distance(player.transform.position, transform.position);
+
+        if (distance <= range)
+        {
+            nav.enabled = true;
+            nav.SetDestination(player.transform.position);
+        }
+
+        else
+        {
+            this.nav.enabled = false;
+
+        }
 
         Attack();
     }

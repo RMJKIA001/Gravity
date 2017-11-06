@@ -246,12 +246,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "You jump into to spaceship, with the enemy aliens hot on your heels. \n\nThe
-    controls are confusing, \nbut the main monitor seems to \nindicate a flight path
-    heading straight back to Earth. \nBelow the monitor is a large red button. \nIt's
-    not entirely clear if that \nbutton will take you back to Earth, \nor perform
-    a completely different action.\n\nBreathing in slowly, you press the button and
-    the spaceship begins to move...\n"
+  m_Text: "You jump into to spaceship, \nwith the enemy aliens hot on your heels.
+    \n\nThe controls are confusing, \nbut the main monitor seems to \nindicate a flight
+    path heading straight back to Earth. \nBelow the monitor is a large red button.
+    \nIt's not entirely clear if that \nbutton will take you back to Earth, \nor perform
+    a completely different action.\n\nBreathing in slowly, \nyou press the button
+    \nand the spaceship\n begins to move...\n"
 --- !u!222 &1552567395
 CanvasRenderer:
   m_ObjectHideFlags: 0
