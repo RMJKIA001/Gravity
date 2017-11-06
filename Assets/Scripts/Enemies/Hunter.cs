@@ -206,7 +206,7 @@ public class Hunter :   MonoBehaviour , IAI
         if (distance <= range)
         {
             nav.enabled = true;
-            nav.SetDestination(player.transform.position);
+           // nav.SetDestination(player.transform.position);
         }
 
         else

@@ -28,8 +28,6 @@ public class BossAI : MonoBehaviour
              if (Time.time > nextFire)
             {
                 ani.SetTrigger("Jump");
-
-
                 nextFire = Time.time + fireRate;
                 player.GetComponent<PlayerHealth>().Decrease(10);
                 impact += -player.transform.forward * 50;

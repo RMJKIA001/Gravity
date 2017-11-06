@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class CanvasButton : MonoBehaviour {
     public float timeLeft = 0;
+    public bool end;
     public GameObject dead;
     public void exit()
     {
@@ -24,8 +25,11 @@ public class CanvasButton : MonoBehaviour {
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
-            dead.SetActive(false);
-            timeLeft = 0;
+            if (!end)
+            {
+                dead.SetActive(false);
+                timeLeft = 0;
+            }
         }
        
     }
