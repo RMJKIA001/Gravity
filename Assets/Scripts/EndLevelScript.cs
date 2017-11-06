@@ -9,7 +9,7 @@ public class EndLevelScript : MonoBehaviour
     //Loads the end level Scene when the player has past a specific point, indicating they won
 	void Update ()
     {
-	    if (transform.position.x > 170)
+	    if (transform.position.x > 236)
         {
             SceneManager.LoadScene("EndLevelStory");
         }	

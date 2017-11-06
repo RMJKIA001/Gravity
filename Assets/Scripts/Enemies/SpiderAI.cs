@@ -44,13 +44,20 @@ public class SpiderAI : MonoBehaviour, IAI {
     public void Attack()
     {
         //attack cooldown
-        if (Time.time > checkTime2)
-        {
-            player.GetComponent<PlayerHealth>().Decrease(5);
-            Debug.Log(bite + " " + bite.isVirtual);
-            bite.Play();
-            checkTime2 = Time.time + attacktime;
+        Vector3 playerPos = player.transform.position;
+        Vector3 AIPos = AI.transform.position;
+        Vector3 distance = AIPos - playerPos;
 
+        if ((distance.x < 3 && distance.x > -3) && (distance.z < 3 && distance.z > -3))
+        {
+            if (Time.time > checkTime2)
+            {
+                player.GetComponent<PlayerHealth>().Decrease(5);
+               // Debug.Log(bite + " " + bite.isVirtual);
+                bite.Play();
+                checkTime2 = Time.time + attacktime;
+
+            }
         }
     }
 
@@ -75,7 +82,7 @@ public class SpiderAI : MonoBehaviour, IAI {
         }
         else if ((distance.x < 8 && distance.x > -8) && (distance.z < 8 && distance.z > -8))
         {
-            Step();
+            //Step();
         }
         
     }
@@ -101,8 +108,8 @@ public class SpiderAI : MonoBehaviour, IAI {
     // Update is called once per frame
     void Update()
     {
-       
-        Roam();
+
+        Attack();
     }
 
     void Hunt()

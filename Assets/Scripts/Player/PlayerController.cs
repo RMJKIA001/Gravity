@@ -11,7 +11,7 @@ public class PlayerController : Photon.MonoBehaviour {
     public Camera cam;
     public float mouseSensitiviy = 1;
     public float velocity = 0;
-    public float jumpSpeed = 4;
+    public float jumpSpeed;
     public float speed = 5;
     public bool ensared = false;
     private bool gun;
@@ -62,7 +62,7 @@ public class PlayerController : Photon.MonoBehaviour {
         //Manipulate gravity
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            jumpSpeed = 4;
+            jumpSpeed = 8;
             
             if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All, false); }
             else
@@ -76,7 +76,7 @@ public class PlayerController : Photon.MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            jumpSpeed = 10;
+            jumpSpeed = 15;
             
             if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All, false); }
             else
@@ -90,7 +90,7 @@ public class PlayerController : Photon.MonoBehaviour {
         }   
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            jumpSpeed = 4;
+            jumpSpeed = 6;
             
             if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All,true); }
             else

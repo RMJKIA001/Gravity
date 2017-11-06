@@ -78,17 +78,18 @@ public class PlayerHealth : MonoBehaviour
         {
             if (GetComponentInParent<PhotonView>().isMine)
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                back.SetActive(true);
-                exit.SetActive(true);
+                //Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+               // back.SetActive(true);
+                //exit.SetActive(true);
                 dead.SetActive(true);
-                HUD.SetActive(false);
-                gunText.SetActive(false);
-                ensnaredText.SetActive(false);
-                deadtext.SetActive(true);
-                transform.position = new Vector3(-1000, -1000, -1000);
-                GetComponent<PlayerController>().enabled = false;
+                transform.position = new Vector3(0, 1, 0);
+                //HUD.SetActive(false);
+                //gunText.SetActive(false);
+                //ensnaredText.SetActive(false);
+                //deadtext.SetActive(true);
+                //transform.position = new Vector3(-1000, -1000, -1000);
+                //GetComponent<PlayerController>().enabled = false;
             }
         }
         else

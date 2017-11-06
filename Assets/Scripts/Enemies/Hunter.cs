@@ -18,11 +18,12 @@ public class Hunter :   MonoBehaviour , IAI
 
     bool IsAttacking  = false;
     //public GameObject Bullet ;
-    float fireRate = 7f;
+    float fireRate = 10f;
     float nextFire = 0;
     public float bulletTime = 50f;
     public float disableBullet = 0;
     public AudioSource trappedeffect;
+    public ParticleSystem particles;
 
     public int x1;
     public int x2;
@@ -61,18 +62,25 @@ public class Hunter :   MonoBehaviour , IAI
     }
     public void Attack()
     {
-         if (Time.time > nextFire && IsAttacking)
-         {
-                nextFire = Time.time + fireRate;
-            trappedeffect.time = 2f;
-            trappedeffect.Play();
-            GetComponent<ParticleSystem>().Emit(50);
-            if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
-            else
+        Vector3 playerPos = player.transform.position;
+        Vector3 AIPos = AI.transform.position;
+        Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
+
+        if ((distanceBetweenThem.x < 8 && distanceBetweenThem.x > -8) && (distanceBetweenThem.z < 8 && distanceBetweenThem.z > -8))
+        {
+            if (Time.time > nextFire)
             {
-                GetComponent<Animator>().SetTrigger("Ens");
-            }
-               // Debug.Log("Hit Player");
+                nextFire = Time.time + fireRate;
+                trappedeffect.time = 2f;
+                trappedeffect.Play();
+                particles.Emit(50);
+
+                if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
+                else
+                {
+                    GetComponent<Animator>().SetTrigger("Ens");
+                }
+                // Debug.Log("Hit Player");
                 if (PhotonNetwork.connected)
                 {
                     if (player.GetPhotonView().isMine)
@@ -90,7 +98,9 @@ public class Hunter :   MonoBehaviour , IAI
                     player.GetComponent<PlayerController>().ensared = true;
                     player.GetComponent<PlayerHealth>().Decrease(10);
                 }
-           }    
+            }
+        }
+           
     }
     //moves up and down the room
     public void Roam()
@@ -167,10 +177,9 @@ public class Hunter :   MonoBehaviour , IAI
 	
 	// Update is called once per frame
 	void Update ()
-    {
-        
-        Roam();
-        Hunt();
+    {   
+        //Roam();
+       // Hunt();
         Attack();
         
     }
