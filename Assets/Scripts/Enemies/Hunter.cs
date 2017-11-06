@@ -35,10 +35,12 @@ public class Hunter : Photon.MonoBehaviour , IAI
     public GameObject trappedText;
     public Animator ani;
     private NavMeshAgent nav;
+    private Navigation navi;
 
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        navi = GetComponent<Navigation>();
     }
 
  
@@ -217,13 +219,14 @@ public class Hunter : Photon.MonoBehaviour , IAI
         if (distance <= range)
         {
             nav.enabled = true;
+            navi.enabled = true;
            // nav.SetDestination(player.transform.position);
         }
 
         else
         {
             this.nav.enabled = false;
-
+            navi.enabled = false;
         }
 
         Attack();

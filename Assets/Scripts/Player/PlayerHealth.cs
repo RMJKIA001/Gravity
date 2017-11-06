@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
 
         HUD.GetComponent<HUD>().create("Health", currhealth, 100);
 
-        if (transform.position.y < -50)
+        if (transform.position.y < -400)
         {
             Dead();
             

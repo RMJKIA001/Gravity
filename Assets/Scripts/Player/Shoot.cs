@@ -54,7 +54,7 @@ public class Shoot : MonoBehaviour
             bullets = bullets - 1;
 
             lightsource.SetActive(true);
-            lightofftime = Time.time + lightofftime;
+            //lightofftime = Time.time + lightofftime;
 
             soundeffect.Play();
             Vector3 crosshair = myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //middle of the screen

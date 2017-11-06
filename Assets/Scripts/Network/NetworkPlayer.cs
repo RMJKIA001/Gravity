@@ -12,8 +12,9 @@ public class NetworkPlayer : Photon.MonoBehaviour {
         //so that you only control yourself and not the other people in the network
         if(GetComponent<PhotonView>().isMine)
         {
-            // myCamera.GetComponent<Camera>().enabled = true;
-            myCamera.SetActive(true);
+            myCamera.GetComponent<Camera>().enabled = true;
+            myCamera.GetComponent<AudioListener>().enabled = true;
+            //myCamera.SetActive(true);
             canvas.SetActive(true);
             GetComponent<PlayerController>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;
@@ -25,8 +26,9 @@ public class NetworkPlayer : Photon.MonoBehaviour {
         //because prefab starts of with these features disabled
         if((!PhotonNetwork.connected))
         {
-            //myCamera.GetComponent<Camera>().enabled = true;
-            myCamera.SetActive(true);
+            myCamera.GetComponent<Camera>().enabled = true;
+            myCamera.GetComponent<AudioListener>().enabled = true;
+            //myCamera.SetActive(true);
             canvas.SetActive(true);
             GetComponent<PlayerController>().enabled = true;
             GetComponent<Rigidbody>().useGravity = true;

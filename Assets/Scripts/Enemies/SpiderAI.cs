@@ -18,10 +18,11 @@ public class SpiderAI : MonoBehaviour, IAI {
     public int range;
 
     private NavMeshAgent nav;
-
+    private Navigation navi;
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        navi = GetComponent<Navigation>();
     }
 
     //find closest player
@@ -122,13 +123,14 @@ public class SpiderAI : MonoBehaviour, IAI {
         if (distance <= range)
         {
             nav.enabled = true;
+            navi.enabled = true;
            // nav.SetDestination(player.transform.position);
         }
 
         else
         {
             this.nav.enabled = false;
-
+            navi.enabled = false;
         }
 
         Attack();

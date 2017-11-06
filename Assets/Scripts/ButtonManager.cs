@@ -26,7 +26,7 @@ public class ButtonManager : MonoBehaviour {
     }
     void OnCreatedRoom()
     {
-        Debug.Log("I have been created");
+        //Debug.Log("I have been created");
         PhotonNetwork.LoadLevel("NetworkPrototype");
     }
     public void CreateRoom()

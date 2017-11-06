@@ -17,25 +17,33 @@ public class Shootable : Photon.MonoBehaviour
     public void Hit (int damage)
     {
         currenthealth = currenthealth - damage;
-        if (currenthealth <= 0 )
-        {
-            gameObject.SetActive(false);
-            healthbar.SetActive(false);  
-        }
         if (PhotonNetwork.connected) { photonView.RPC("updateHealth", PhotonTargets.All, photonView.viewID, currenthealth); }
-        healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
-        
+        else
+        {
+            if (currenthealth <= 0 )
+            {
+                gameObject.SetActive(false);
+                healthbar.SetActive(false);  
+             }
+            else
+            {
+               healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
+            }
+        }
     }
-
+    public GameObject[] x=GameObject.FindGameObjectsWithTag("Enemy ");
     //Synchronises the damage done to the enemy acrosss the network.
     [PunRPC]
     void updateHealth(int a, int health)
     {
-        GameObject[] x = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("RPC");
+        
+
         foreach (GameObject y in x)
         {
             if (y.GetPhotonView().viewID == a)
             {
+                Debug.Log("Mine");
                 y.GetComponent<Shootable>().currenthealth  = health;
                 if (currenthealth <= 0)
                 {
