@@ -112,28 +112,7 @@ public class PlayerController : Photon.MonoBehaviour {
         }
         else
         {
-            if (PhotonNetwork.connected)
-            {
-                GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
-                foreach (GameObject y in x)
-                {
-                    if (y.Equals(this))
-                    {
-
-                    }
-                    else
-                    {
-                        Vector3 playerPos = transform.position;
-                        Vector3 AIPos = y.transform.position;
-                        Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
-                        if ((distanceBetweenThem.x < 5 && distanceBetweenThem.x > -5) && (distanceBetweenThem.z < 5 && distanceBetweenThem.z > -5))
-                        {
-                            ensared = false;
-                        }
-                    }
-
-                }
-            }
+           
             move = new Vector3(0, 0, 0);
             if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All,"Idle"); }
             else{   ani.SetTrigger("Idle");
@@ -169,3 +148,25 @@ public class PlayerController : Photon.MonoBehaviour {
     }
 }
 
+/*if (PhotonNetwork.connected)
+           {
+               GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
+               foreach (GameObject y in x)
+               {
+                   if (y.Equals(this))
+                   {
+
+                   }
+                   else
+                   {
+                       Vector3 playerPos = transform.position;
+                       Vector3 AIPos = y.transform.position;
+                       Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
+                       if ((distanceBetweenThem.x < 5 && distanceBetweenThem.x > -5) && (distanceBetweenThem.z < 5 && distanceBetweenThem.z > -5))
+                       {
+                           ensared = false;
+                       }
+                   }
+
+               }
+           }*/

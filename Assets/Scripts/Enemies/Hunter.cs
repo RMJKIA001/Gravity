@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
-public class Hunter :   MonoBehaviour , IAI
+public class Hunter : Photon.MonoBehaviour , IAI
 {
     public float speed;
     public float travelled = 0;
@@ -33,7 +33,7 @@ public class Hunter :   MonoBehaviour , IAI
     public int x3;
     public int x4;
     public GameObject trappedText;
-
+    public Animator ani;
     private NavMeshAgent nav;
 
     private void Start()
@@ -63,9 +63,10 @@ public class Hunter :   MonoBehaviour , IAI
         }
         player = closestPlayer;
         // Bullet.GetComponent<Bullet>().setPlayer(player);
-        
+         if (player.GetComponentInChildren<Canvas>().enabled)
+        {
             trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
-        
+        }
     }
     void FixedUpdate()
     {
@@ -79,6 +80,7 @@ public class Hunter :   MonoBehaviour , IAI
 
         if ((distanceBetweenThem.x < 8 && distanceBetweenThem.x > -8) && (distanceBetweenThem.z < 8 && distanceBetweenThem.z > -8))
         {
+            ani.SetBool("Distance", true);
             if (Time.time > nextFire)
             {
                 var RayDirection = player.transform.position - transform.position;
@@ -96,18 +98,23 @@ public class Hunter :   MonoBehaviour , IAI
                         if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Ens"); }
                         else
                         {
-                            GetComponent<Animator>().SetTrigger("Ens");
+                            ani.SetTrigger("Ens");
                         }
                         // Debug.Log("Hit Player");
                         if (PhotonNetwork.connected)
                         {
+                            
                             if (player.GetPhotonView().isMine)
                             {
+                                //Debug.Log("Is Mine");
                                 trappedText.GetComponent<Text>().enabled = true;
                                 trappedText.GetComponent<EnsnaredTimer>().timeLeft = 5f;
+                                //photonView.RPC("Ensnared", PhotonTargets.All, player.GetPhotonView().viewID);
+                                player.GetComponent<PlayerController>().ensared = true;
+                                //Debug.Log(player.GetComponent<PlayerController>().ensared);
+                                player.GetComponent<PlayerHealth>().Decrease(10);
                             }
-                            player.GetComponent<PlayerController>().ensared = true;
-                            player.GetComponent<PlayerHealth>().Decrease(10);
+                            
                         }
                         else
                         {
@@ -120,6 +127,10 @@ public class Hunter :   MonoBehaviour , IAI
                 }
 
             }
+        }
+        else
+        {
+            ani.SetBool("Distance", false);
         }
            
     }
@@ -234,11 +245,27 @@ public class Hunter :   MonoBehaviour , IAI
             IsAttacking = false;
         }
     }
+    /*[PunRPC]
+    void Ensnared(int id)
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+       // Debug.Log(objs);
+        foreach (GameObject curr in objs)
+        {
+            //curr.
+            if (curr.GetPhotonView().viewID == id)
+            {
+                //Debug.Log("Hey there");
+                curr.GetComponent<PlayerController>().ensared = true;
+            }
+        }
+    }*/
     [PunRPC]
     void Trigger(string x)
     {
-        GetComponent<Animator>().SetTrigger(x);
+        ani.SetTrigger(x);
     }
+
 }
 
 

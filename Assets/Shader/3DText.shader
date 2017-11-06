@@ -14,3 +14,5 @@ Shader "GUI/3D Text Shader - Cull Back" {
 				combine primary, texture * primary
 			}
 		}
+	}
+}

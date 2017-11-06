@@ -981,12 +981,12 @@ GameObject:
   - component: {fileID: 4767690503193554}
   - component: {fileID: 95589433119356344}
   - component: {fileID: 65108376832926382}
-  - component: {fileID: 114783982328012708}
   - component: {fileID: 114904086203457346}
   - component: {fileID: 114065738317181414}
   - component: {fileID: 114204911845007370}
   - component: {fileID: 195447547363133762}
   - component: {fileID: 114635754671219708}
+  - component: {fileID: 114549759057414770}
   m_Layer: 0
   m_Name: HunterAnimated
   m_TagString: Enemy
@@ -9074,7 +9074,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1196903302719474}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.97, y: 0, z: 59.31}
+  m_LocalPosition: {x: -1.92, y: 0, z: 57.53}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4700347663366540}
@@ -10357,16 +10357,17 @@ MonoBehaviour:
   travelled: 0
   distance: 0
   AI: {fileID: 1196903302719474}
-  ani: {fileID: 95589433119356344}
   bulletTime: 10
   disableBullet: 0
   trappedeffect: {fileID: 0}
   particles: {fileID: 198666113718794040}
+  range: 0
   x1: 60
   x2: 40
   x3: 4
   x4: -1
   trappedText: {fileID: 0}
+  ani: {fileID: 95589433119356344}
 --- !u!114 &114204911845007370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10381,19 +10382,7 @@ MonoBehaviour:
   totalhealth: 100
   currenthealth: 100
   healthbar: {fileID: 1934850334489710}
---- !u!114 &114635754671219708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1196903302719474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0795c89d74bc904f8476fd898fd72b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
---- !u!114 &114783982328012708
+--- !u!114 &114549759057414770
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -10410,9 +10399,24 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Ens
+  - Type: 4
+    SynchronizeType: 2
+    Name: Distance
   m_SynchronizeLayers:
-  - SynchronizeType: 2
+  - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &114635754671219708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1196903302719474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0795c89d74bc904f8476fd898fd72b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!114 &114904086203457346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10434,7 +10438,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 4767690503193554}
-  - {fileID: 0}
+  - {fileID: 114549759057414770}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

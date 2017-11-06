@@ -41,4 +41,6 @@ MonoBehaviour:
   - updateHealth
   - kill
   - Trigger
+  - Ensared
+  - Ensnared
   DisableAutoOpenWizard: 1

@@ -84,6 +84,7 @@ public class PlayerHealth : MonoBehaviour
                 //exit.SetActive(true);
                 dead.SetActive(true);
                 transform.position = new Vector3(0, 1, 0);
+                currhealth = 100;
                 //HUD.SetActive(false);
                 //gunText.SetActive(false);
                 //ensnaredText.SetActive(false);
