@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossAI : MonoBehaviour
+public class BossAI : Photon.MonoBehaviour
 {
     public GameObject player;
     public GameObject AI;
@@ -27,7 +27,11 @@ public class BossAI : MonoBehaviour
         {
              if (Time.time > nextFire)
             {
-                ani.SetTrigger("Jump");
+                if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All, "Jump"); }
+                else
+                {
+                    ani.SetTrigger("Jump");
+                }
                 nextFire = Time.time + fireRate;
                 player.GetComponent<PlayerHealth>().Decrease(10);
                 impact += -player.transform.forward * 50;
@@ -37,7 +41,11 @@ public class BossAI : MonoBehaviour
         }
 
     }
-
+    [PunRPC]
+    void Trigger(string x)
+    {
+        ani.SetTrigger(x);
+    }
 
     void FixedUpdate()
     {

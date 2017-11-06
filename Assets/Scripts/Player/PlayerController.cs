@@ -104,7 +104,6 @@ public class PlayerController : Photon.MonoBehaviour {
             }
         }
 
-
         Vector3 move;
         if (!ensared)
         {

@@ -34,7 +34,7 @@ public class Shoot : MonoBehaviour
         //transform.up = hand.up;
         //transform.right = hand.right;
         
-            transform.position = hand.position;
+         transform.position = hand.position;
         
         float time = Time.time;
 
@@ -65,7 +65,7 @@ public class Shoot : MonoBehaviour
 
             if (Physics.Raycast(crosshair, myCamera.transform.forward, out hit, 500))
             {
-                //Debug.Log("Hit");
+                Debug.Log("Hit");
                 nextFire = Time.time + fireRate;
 
                 linedraw.SetPosition(1, hit.point);
