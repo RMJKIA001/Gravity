@@ -42,7 +42,7 @@ using System.Collections;
         //PhotonNetwork.playerName = x + " "; // force a trailing space string in case value is an empty string, else playerName would not be updated.
         PlayerNetwork.instance.pname = playername;
             PlayerPrefs.SetString(playerNamePrefKey, playername);
-            Debug.Log("pname set");
+            //Debug.Log("pname set");
         PhotonNetwork.ConnectUsingSettings("1");
     }
 
