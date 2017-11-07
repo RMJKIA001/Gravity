@@ -55,7 +55,10 @@ public class PlayerHealth : MonoBehaviour
             //dead
             Dead();
         }
-        currhealth = temp;
+        else
+        {
+            currhealth = temp;
+        }
     }
 
     // Update is called once per frame
@@ -64,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
 
         HUD.GetComponent<HUD>().create("Health", currhealth, 100);
 
-        if (transform.position.y < -400)
+        if (transform.position.y < -300)
         {
             Dead();
             

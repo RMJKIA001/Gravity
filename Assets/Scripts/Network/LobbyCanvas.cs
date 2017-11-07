@@ -11,6 +11,7 @@ public class LobbyCanvas : MonoBehaviour {
     {
         Debug.Log("Lobby Canvas");
         PhotonNetwork.JoinRoom(room);
+        PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.LoadLevel("NetworkPrototype");
     }
     //OnJoinedRoom ()
