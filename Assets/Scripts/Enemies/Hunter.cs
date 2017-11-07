@@ -98,6 +98,7 @@ public class Hunter : Photon.MonoBehaviour , IAI
                 {
                     if (hit.transform == player.transform)
                     {
+
                         nextFire = Time.time + fireRate;
                         trappedeffect.time = 2f;
                         trappedeffect.Play();

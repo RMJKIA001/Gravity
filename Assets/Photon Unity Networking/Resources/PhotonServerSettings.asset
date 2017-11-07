@@ -45,4 +45,5 @@ MonoBehaviour:
   - Ensnared
   - gun
   - shoot
+  - Jump
   DisableAutoOpenWizard: 1

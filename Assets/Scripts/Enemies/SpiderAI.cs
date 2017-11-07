@@ -127,12 +127,6 @@ public class SpiderAI : MonoBehaviour, IAI {
            // nav.SetDestination(player.transform.position);
         }
 
-        else
-        {
-            this.nav.enabled = false;
-            navi.enabled = false;
-        }
-
         Attack();
     }
 

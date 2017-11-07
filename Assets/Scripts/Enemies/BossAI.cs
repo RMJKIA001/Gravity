@@ -14,6 +14,8 @@ public class BossAI : Photon.MonoBehaviour
     float nextFire = 0;
 
     bool hit = false;
+    GameObject netPlay;
+    int hitc=0;
     Vector3 impact = Vector3.zero;
 
 
@@ -36,8 +38,9 @@ public class BossAI : Photon.MonoBehaviour
                         photonView.RPC("Trigger", PhotonTargets.All, "Jump");
                         nextFire = Time.time + fireRate;
                         p.GetComponent<PlayerHealth>().Decrease(10);
-                        impact += -player.transform.forward * 50;
-                        hit = true;
+                        impact += -p.transform.forward * 50;
+                        hitc += 1;
+                        netPlay = p;
 
                     }
                 }
@@ -83,31 +86,44 @@ public class BossAI : Photon.MonoBehaviour
     void Update()
     {
         
-        if (hit)
-        {
-            if(PhotonNetwork.connected)
+           if(PhotonNetwork.connected)
             {
-                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                foreach (GameObject p in players)
+                if (hitc==2)
                 {
-                    p.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
-                    impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject p in players)
+                    {
+                        p.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
+                        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+                    }
                 }
-                
-
-            }
-            else
+            else if(hitc==1)
             {
-                player.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
+                netPlay.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
                 impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
-
+                
             }
-
             if (impact.magnitude < 0.2)
             {
-                hit = false;
+                hitc = 0;
             }
-        }
+
+
+           }
+            else
+            {
+                if (hit)
+                {
+                    player.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
+                    impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
+                    if (impact.magnitude < 0.2)
+                    {
+                        hit = false;
+                    }
+                }
+            
+            }
+        
 
     }
 

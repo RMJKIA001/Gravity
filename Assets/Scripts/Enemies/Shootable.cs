@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Shootable : Photon.MonoBehaviour
@@ -12,7 +13,7 @@ public class Shootable : Photon.MonoBehaviour
     private void Start()
     {
         x = GameObject.FindGameObjectsWithTag("Enemy");
-        healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
+        healthbar.GetComponent<TextMeshProUGUI>().SetText(currenthealth + "/" + totalhealth);
     }
 
     //decrease health by damage
@@ -25,11 +26,11 @@ public class Shootable : Photon.MonoBehaviour
             if (currenthealth <= 0 )
             {
                 gameObject.SetActive(false);
-                healthbar.SetActive(false);  
+               // healthbar.SetActive(false);
              }
             else
             {
-               healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
+                healthbar.GetComponent<TextMeshProUGUI>().SetText(currenthealth + "/" + totalhealth);
             }
         }
     }
@@ -51,10 +52,11 @@ public class Shootable : Photon.MonoBehaviour
                 {
 
                     gameObject.SetActive(false);
-                    healthbar.SetActive(false);
+                   // healthbar.SetActive(false);
+                   // healthbar.SetText("");
 
                 }
-                y.GetComponent<Shootable>().healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
+                y.GetComponent<Shootable>().healthbar.GetComponent<TextMeshProUGUI>().SetText(currenthealth + "/" + totalhealth);
                 break;
             }
         }

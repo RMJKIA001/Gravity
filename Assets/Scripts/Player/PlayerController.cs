@@ -62,11 +62,15 @@ public class PlayerController : Photon.MonoBehaviour {
         //Manipulate gravity
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            jumpSpeed = 8;
             
-            if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All, false); }
+            
+            if (PhotonNetwork.connected) {
+                photonView.RPC("MoveObj", PhotonTargets.All, false);
+                photonView.RPC("Jump",PhotonTargets.All,8);
+            }
             else
             {
+                jumpSpeed = 8;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
                 foreach (GameObject platform in platforms)
                 {
@@ -76,11 +80,14 @@ public class PlayerController : Photon.MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            jumpSpeed = 15;
             
-            if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All, false); }
+            if (PhotonNetwork.connected) {
+                photonView.RPC("MoveObj", PhotonTargets.All, false);
+                photonView.RPC("Jump", PhotonTargets.All, 15);
+            }
             else
             {
+                jumpSpeed = 15;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
                 foreach (GameObject platform in platforms)
                 {
@@ -90,11 +97,14 @@ public class PlayerController : Photon.MonoBehaviour {
         }   
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            jumpSpeed = 6;
             
-            if (PhotonNetwork.connected) { photonView.RPC("MoveObj", PhotonTargets.All,true); }
+            if (PhotonNetwork.connected) {
+                photonView.RPC("MoveObj", PhotonTargets.All,true);
+                photonView.RPC("Jump", PhotonTargets.All, 6);
+            }
             else
             {
+                jumpSpeed = 6;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
 
                 foreach (GameObject platform in platforms)
@@ -131,6 +141,17 @@ public class PlayerController : Photon.MonoBehaviour {
             y.GetComponent<GravityControl>().setGravity(grav);
      
         }
+    }
+    [PunRPC]
+    void Jump(int x)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in players)
+        {
+            y.GetComponent<PlayerController>().jumpSpeed = x;
+        }
+
+
     }
     //ani.SetTrigger("Jump"); 
     [PunRPC]
