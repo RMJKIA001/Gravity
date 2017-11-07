@@ -46,4 +46,5 @@ MonoBehaviour:
   - gun
   - shoot
   - Jump
+  - scene
   DisableAutoOpenWizard: 1

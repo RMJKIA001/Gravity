@@ -21,17 +21,23 @@ public class Collectable : Photon.MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameObject playerObj= other.gameObject;
-            if (PhotonNetwork.connected){
-                if (photonView.isMine)
-                {
-                    effect.Play();
-                }
-            } else {
-                effect.Play(); }
+
             if (type == "ShotGun" || type == "LazerGun")
             {
                 if(!GunEnabled)
                 {
+                    if (PhotonNetwork.connected)
+                    {
+                        if (photonView.isMine)
+                        {
+                             effect.Play();
+                        }
+                    }
+                    else
+                    {
+                        effect.Play();
+                    }
+                        
                     playerObj.GetComponent<GunControls>().enableGun();
                     enabled = true;
                 }

@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour {
-    public GameObject play,howto,settings,exit,sinlge,two,load,start,join,create,back,canv,howToC,Ename, scrollView, createRM,rmname;
-    public Transform  s, lg;
+    public GameObject play,howto,exit,sinlge,two,start,join,create,back,canv,howToC,Ename, scrollView, createRM,rmname;
+   
     [SerializeField]
     private Text _roomName;
     private Text RoomName
@@ -15,8 +15,6 @@ public class ButtonManager : MonoBehaviour {
     }
     public void Start()
     {
-         s.GetComponent<Button>().interactable = false;
-         lg.GetComponent<Button>().interactable = false;
          
     }
   
@@ -44,7 +42,6 @@ public class ButtonManager : MonoBehaviour {
     {
          play.SetActive(false);
          howto.SetActive(false);
-         settings.SetActive(false);
          exit.SetActive(false);
          sinlge.SetActive(true);
          two.SetActive(true);
@@ -60,11 +57,7 @@ public class ButtonManager : MonoBehaviour {
         }
 
     }
-    //Not for prototype
-    public void Settingsbtn()
-    {
-
-    }
+ 
 
     public void Exitbtn()
     {
@@ -75,18 +68,12 @@ public class ButtonManager : MonoBehaviour {
     {
         sinlge.SetActive(false);
         two.SetActive(false);
-        load.SetActive(true);
         start.SetActive(true);
     }
 
     public void Newbtn()
     {
         SceneManager.LoadScene("BeginLevelStory");
-    }
-    //Not for prototype
-    public void Loadbtn()
-    {
-
     }
     //Not for prototype
     public void TwoPlayerbtn()
@@ -131,7 +118,6 @@ public class ButtonManager : MonoBehaviour {
         {
             play.SetActive(true);
             howto.SetActive(true);
-            settings.SetActive(true);
             exit.SetActive(true);
             sinlge.SetActive(false);
             two.SetActive(false);
@@ -144,7 +130,6 @@ public class ButtonManager : MonoBehaviour {
             join.SetActive(false);
             Ename.SetActive(false);
             create.SetActive(false);
-            load.SetActive(false);
             start.SetActive(false);
             if (PhotonNetwork.connected) { PhotonNetwork.Disconnect(); }
             
@@ -154,15 +139,7 @@ public class ButtonManager : MonoBehaviour {
             howToC.SetActive(false);
             canv.SetActive(true);
         }
-       /* if(scrollView.activeSelf)
-        {
-            scrollView.SetActive(false);
-            sinlge.SetActive(false);
-            two.SetActive(false);
-            join.SetActive(true);
-            create.SetActive(true);
-            Ename.SetActive(true);
-        }*/
+
         if(createRM.activeSelf)
         {
             createRM.SetActive(false);
@@ -170,7 +147,6 @@ public class ButtonManager : MonoBehaviour {
             scrollView.SetActive(false);
             sinlge.SetActive(false);
             two.SetActive(false);
-            //join.SetActive(true);
             create.SetActive(true);
             Ename.SetActive(true);
         }

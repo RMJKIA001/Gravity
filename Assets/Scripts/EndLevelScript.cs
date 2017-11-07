@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EndLevelScript : MonoBehaviour
+public class EndLevelScript : Photon.MonoBehaviour
 {
-    void load()
+   
+    public void load()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("EndLevelStory");
     }
 	// Update is called once per frame
@@ -17,8 +20,7 @@ public class EndLevelScript : MonoBehaviour
         {
             if (PhotonNetwork.connected)
             {
-                PhotonNetwork.LoadLevel("EndLevelStory");
-                
+                photonView.RPC("scene",PhotonTargets.All);
             }
             else
             {
@@ -26,4 +28,15 @@ public class EndLevelScript : MonoBehaviour
             }
         }
 	}
+
+    [PunRPC]
+    void scene()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject x in players)
+        {
+            x.GetComponent<EndLevelScript>().load();
+        }
+
+    }
 }
