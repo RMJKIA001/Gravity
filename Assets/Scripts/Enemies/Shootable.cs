@@ -7,9 +7,11 @@ public class Shootable : Photon.MonoBehaviour
     public int totalhealth =100;
     public int currenthealth;
     public  GameObject healthbar;
+    public GameObject[] x;
 
     private void Start()
     {
+        x = GameObject.FindGameObjectsWithTag("Enemy");
         healthbar.GetComponent<TextMesh>().text = currenthealth + "/" + totalhealth;
     }
 
@@ -31,7 +33,7 @@ public class Shootable : Photon.MonoBehaviour
             }
         }
     }
-    public GameObject[] x=GameObject.FindGameObjectsWithTag("Enemy ");
+    
     //Synchronises the damage done to the enemy acrosss the network.
     [PunRPC]
     void updateHealth(int a, int health)
