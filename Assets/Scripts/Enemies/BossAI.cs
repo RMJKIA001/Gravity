@@ -9,6 +9,7 @@ public class BossAI : Photon.MonoBehaviour
     public GameObject player;
     public GameObject AI;
     public Animator ani;
+    public AudioSource effect;
 
     float fireRate = 5f;
     float nextFire = 0;
@@ -30,11 +31,11 @@ public class BossAI : Photon.MonoBehaviour
                 Vector3 AIPos = AI.transform.position;
                 Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
 
-                if ((distanceBetweenThem.x < 10 && distanceBetweenThem.x > -10) && (distanceBetweenThem.z < 10 && distanceBetweenThem.z > -10))
+                if ((distanceBetweenThem.x < 6 && distanceBetweenThem.x > -6) && (distanceBetweenThem.z < 6 && distanceBetweenThem.z > -6))
                 {
                     if (Time.time > nextFire)
                     {
-
+                        effect.Play();
                         photonView.RPC("Trigger", PhotonTargets.All, "Jump");
                         nextFire = Time.time + fireRate;
                         p.GetComponent<PlayerHealth>().Decrease(10);
@@ -54,11 +55,11 @@ public class BossAI : Photon.MonoBehaviour
             Vector3 AIPos = AI.transform.position;
             Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
 
-            if ((distanceBetweenThem.x < 10 && distanceBetweenThem.x > -10) && (distanceBetweenThem.z < 10 && distanceBetweenThem.z > -10))
+            if ((distanceBetweenThem.x < 6 && distanceBetweenThem.x > -6) && (distanceBetweenThem.z < 6 && distanceBetweenThem.z > -6))
             {
                 if (Time.time > nextFire)
                 {
-
+                    effect.Play();
                     ani.SetTrigger("Jump");
                     nextFire = Time.time + fireRate;
                     player.GetComponent<PlayerHealth>().Decrease(10);
