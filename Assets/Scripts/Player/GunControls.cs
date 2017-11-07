@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunControls : MonoBehaviour {
+public class GunControls : Photon.MonoBehaviour {
 
     public GameObject gun1;
     public GameObject gun2;
@@ -31,15 +31,33 @@ public class GunControls : MonoBehaviour {
             {
                 if (gun1.activeInHierarchy == true)
                 {
-                    gun1.SetActive(false);
-                    gun2.SetActive(true);
-                    active = gun2;
+                    
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("gun", PhotonTargets.All, photonView.viewID, false, true);
+                    }
+                    else
+                    {
+                        gun1.SetActive(false);
+                        gun2.SetActive(true);
+                        active = gun2;
+                    }
+
                 }
                 else
                 {
-                    gun1.SetActive(true);
-                    gun2.SetActive(false);
-                    active = gun1;
+                    
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("gun", PhotonTargets.All, photonView.viewID, true, false);
+                    }
+                    else
+                    {
+                        gun1.SetActive(true);
+                        gun2.SetActive(false);
+                        active = gun1;
+                    }
+
                 }
 
             }
@@ -47,15 +65,33 @@ public class GunControls : MonoBehaviour {
             {
                 if (gun1.activeInHierarchy == true)
                 {
-                    gun1.SetActive(false);
-                    gun2.SetActive(true);
-                    active = gun2;
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("gun", PhotonTargets.All, photonView.viewID, false, true);
+                    }
+                    else
+                    {
+                        gun1.SetActive(false);
+                        gun2.SetActive(true);
+                        active = gun2;
+
+                    }
+
                 }
                 else
                 {
-                    gun1.SetActive(true);
-                    gun2.SetActive(false);
-                    active = gun1;
+                    if (PhotonNetwork.connected)
+                    {
+                        photonView.RPC("gun", PhotonTargets.All, photonView.viewID, true, false);
+                    }
+                    else
+                    {
+                        gun1.SetActive(true);
+                        gun2.SetActive(false);
+                        active = gun1;
+
+                    }
+
                 }
             }
         }
@@ -63,16 +99,32 @@ public class GunControls : MonoBehaviour {
         {
             if(shotGun)
             {
-                gun1.SetActive(true);
-                gun2.SetActive(false);
-                //GetComponent<NetworkPlayer>().shot.SetActive(true);
-                active = gun1;
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("gun", PhotonTargets.All, photonView.viewID, true, false);
+                }
+                else
+                {
+                    gun1.SetActive(true);
+                    gun2.SetActive(false);
+
+                    active = gun1;
+                }
             }
             else if(lazerGun)
             {
-                gun1.SetActive(false);
-                gun2.SetActive(true);
-                active = gun2;
+                if (PhotonNetwork.connected)
+                {
+                    photonView.RPC("gun", PhotonTargets.All, photonView.viewID, false, true);
+                }
+                else
+                {
+                    gun1.SetActive(false);
+                    gun2.SetActive(true);
+                    active = gun2;
+
+                }
+
             }
         }
         if(shotGun || lazerGun)
@@ -83,6 +135,26 @@ public class GunControls : MonoBehaviour {
         else
         {
             HUD.SetActive(false);
+        }
+    }
+    [PunRPC]
+    void gun(int a, bool g,bool g2)
+    {
+        
+        GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in x)
+        {
+            if (y.GetPhotonView().viewID == a)
+            {
+                //Debug.Log(" mine");
+                y.GetComponent<GunControls>().gun1.SetActive(g);
+                y.GetComponent<GunControls>().gun2.SetActive(g2);
+                if (g)
+                    y.GetComponent<GunControls>().active = y.GetComponent<GunControls>().gun1;
+                else
+                    y.GetComponent<GunControls>().active = y.GetComponent<GunControls>().gun2;
+                break;
+            }
         }
 
     }

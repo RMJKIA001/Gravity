@@ -145,6 +145,23 @@ public class PlayerController : Photon.MonoBehaviour {
 
         
     }
+    [PunRPC]
+    void shoot(bool g, bool g2)
+    {
+
+        GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in x)
+        {
+            if (y.GetPhotonView() == this.photonView)
+            {
+                //Debug.Log(" mine");
+                y.GetComponent<GunControls>().active.GetComponent<Shoot>().getLine(g);
+                y.GetComponent<GunControls>().active.GetComponent<Shoot>().lightsource.SetActive(g2);
+                break;
+            }
+        }
+
+    }
 }
 
 /*if (PhotonNetwork.connected)

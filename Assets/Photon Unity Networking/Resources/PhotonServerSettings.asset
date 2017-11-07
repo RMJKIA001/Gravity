@@ -43,4 +43,6 @@ MonoBehaviour:
   - Trigger
   - Ensared
   - Ensnared
+  - gun
+  - shoot
   DisableAutoOpenWizard: 1

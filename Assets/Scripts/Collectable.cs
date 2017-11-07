@@ -21,7 +21,13 @@ public class Collectable : Photon.MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameObject playerObj= other.gameObject;
-            effect.Play();
+            if (PhotonNetwork.connected){
+                if (photonView.isMine)
+                {
+                    effect.Play();
+                }
+            } else {
+                effect.Play(); }
             if (type == "ShotGun" || type == "LazerGun")
             {
                 if(!GunEnabled)
@@ -102,9 +108,19 @@ public class Collectable : Photon.MonoBehaviour
                 {
                     //Debug.Log("befor: "+ effect+" "+ effect.isPlaying);
                     //gameObject.GetComponent<AudioSource>().Play();
+                    if (PhotonNetwork.connected)
+                    {
+                        if (photonView.isMine)
+                    {
+                        effect.Play();
+                    }
+                }
+                else
+                {
                     effect.Play();
-                    //Debug.Log("After: "+effect + " " + effect.isPlaying);
-                    particleEffect.transform.position = this.transform.position;
+                }
+                //Debug.Log("After: "+effect + " " + effect.isPlaying);
+                particleEffect.transform.position = this.transform.position;
                     pref = gameObject.tag + "Particle";
                     if (PhotonNetwork.connected) { photonView.RPC("DestObj", PhotonTargets.MasterClient, photonView.viewID, gameObject.tag ,pref); }
                     else

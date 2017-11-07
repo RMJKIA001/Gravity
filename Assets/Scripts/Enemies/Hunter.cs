@@ -65,7 +65,13 @@ public class Hunter : Photon.MonoBehaviour , IAI
         }
         player = closestPlayer;
         // Bullet.GetComponent<Bullet>().setPlayer(player);
-         if (player.GetComponentInChildren<Canvas>().enabled)
+        if (PhotonNetwork.connected) {
+            if(player.GetPhotonView().isMine)
+            {
+                trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
+            }
+        }
+        else
         {
             trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
         }
