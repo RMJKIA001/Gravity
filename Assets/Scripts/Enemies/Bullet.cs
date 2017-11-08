@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ class not used in this build
+     */
 public class Bullet : MonoBehaviour {
     public GameObject trappedText;
     public GameObject player;

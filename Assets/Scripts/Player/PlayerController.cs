@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : Photon.MonoBehaviour {
+public class PlayerController : Photon.MonoBehaviour
+{
+    //variables used throughout class
     private CharacterController cont;
     private float currCamPosition = 0;
     private float vert, hori;
@@ -16,11 +18,15 @@ public class PlayerController : Photon.MonoBehaviour {
     public float speed = 5;
     public bool ensared = false;
     private bool gun;
+
     // Use this for initialization
     void Start ()
     {
-      //  Cursor.visible = false;
-      //  Cursor.lockState = CursorLockMode.Locked;
+        //set cursor status
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        //get character controller and animator
         cont = GetComponent<CharacterController>();
         ani = GetComponent<Animator>();
     }
@@ -43,16 +49,21 @@ public class PlayerController : Photon.MonoBehaviour {
         ani.SetBool( "Gun",GetComponent<GunControls>().shotGun || GetComponent<GunControls>().lazerGun);
         
         bool isWalking = (vert != 0 || hori != 0);
+
+        //set animation
         ani.SetBool("Walking", isWalking);
        
+        //increase speed if sprinting
         if (Input.GetKey(KeyCode.LeftShift) && isWalking)
         {
             vert *= 2f;
         }
 
+        //jump
         if (Input.GetButtonDown("Jump") && cont.isGrounded)
         {
             velocity = jumpSpeed;
+            //update for two players
             if (PhotonNetwork.connected) { GetComponent<PhotonView>().RPC("Trigger", PhotonTargets.All,"Jump"); }
             else {
                 ani.SetTrigger("Jump"); }
@@ -60,18 +71,21 @@ public class PlayerController : Photon.MonoBehaviour {
         }
        
 
-        //Manipulate gravity
+        //set gravity back to normal
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             
-            
+            //move objects for both players
             if (PhotonNetwork.connected) {
                 photonView.RPC("MoveObj", PhotonTargets.All, false);
                 photonView.RPC("Jump",PhotonTargets.All,7);
             }
             else
             {
+                //normal jump height
                 jumpSpeed = 7;
+
+                //adjust platforms for both players
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
                 foreach (GameObject platform in platforms)
                 {
@@ -79,6 +93,7 @@ public class PlayerController : Photon.MonoBehaviour {
                 }
             }
         }
+        //2 pressed
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             
@@ -88,26 +103,32 @@ public class PlayerController : Photon.MonoBehaviour {
             }
             else
             {
+                //set both players to jump higher
                 jumpSpeed = 15;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
+
+                //move all platforms back to normal
                 foreach (GameObject platform in platforms)
                 {
                     platform.GetComponent<GravityControl>().setGravity(false);
                 }
             }
         }   
+        //if 3 pressed
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            
+            //set for both players
             if (PhotonNetwork.connected) {
                 photonView.RPC("MoveObj", PhotonTargets.All,true);
                 photonView.RPC("Jump", PhotonTargets.All, 7);
             }
             else
             {
+                //normal jump height
                 jumpSpeed = 7;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
 
+                //adjust platforms
                 foreach (GameObject platform in platforms)
                 {
                     platform.GetComponent<GravityControl>().setGravity(true);
@@ -118,17 +139,19 @@ public class PlayerController : Photon.MonoBehaviour {
         Vector3 move;
         if (!ensared)
         {
+            //move speed
             move = new Vector3(hori * speed, velocity, vert * speed);
         }
         else
         {
-           
+            //dont allow player to move if ensnared
             move = new Vector3(0, 0, 0);
             if (PhotonNetwork.connected) { photonView.RPC("Trigger", PhotonTargets.All,"Idle"); }
             else{   ani.SetTrigger("Idle");
         }
            
         }
+        //animations
         cont.Move(transform.rotation * move * Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Menu"); Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None; }
@@ -147,6 +170,7 @@ public class PlayerController : Photon.MonoBehaviour {
     [PunRPC]
     void Jump(int x)
     {
+        //synchronize players according to gravity
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject y in players)
         {
@@ -159,6 +183,8 @@ public class PlayerController : Photon.MonoBehaviour {
     [PunRPC]
     void Trigger(string x)
     {
+        //set animation for player
+        //jump
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject y in players)
         {
@@ -169,10 +195,13 @@ public class PlayerController : Photon.MonoBehaviour {
         
     }
     [PunRPC]
+    //shoot
     void shoot(bool g, bool g2)
     {
-
+        //get players
         GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
+
+        //show lightsource shooting for each player
         foreach (GameObject y in x)
         {
             if (y.GetPhotonView() == this.photonView)
@@ -189,7 +218,8 @@ public class PlayerController : Photon.MonoBehaviour {
     [PunRPC]
     void shootSound()
     {
-
+        //for each player
+        //show sound of other player shooting
         GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject y in x)
         {

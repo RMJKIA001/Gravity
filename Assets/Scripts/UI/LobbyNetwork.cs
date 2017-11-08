@@ -9,6 +9,7 @@ public class LobbyNetwork : MonoBehaviour {
        // PhotonNetwork.ConnectUsingSettings(VERSION);
     }
 
+    //check connection to host of server
     private void OnConnectedToMaster()
     {
         Debug.Log("master");
@@ -17,6 +18,7 @@ public class LobbyNetwork : MonoBehaviour {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
     
+    //add log of who joined a lobby
     void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby "+ PhotonNetwork.countOfPlayers);

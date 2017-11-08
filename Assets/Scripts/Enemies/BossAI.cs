@@ -24,24 +24,28 @@ public class BossAI : Photon.MonoBehaviour
     {
         if (PhotonNetwork.connected)
         {
+            /*
+             get all players in the room and check if there is a hit
+             */
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
             foreach (GameObject p in players)
             {
                 Vector3 playerPos = p.transform.position;
                 Vector3 AIPos = AI.transform.position;
-                Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
+                Vector3 distanceBetweenThem = AIPos - playerPos;
 
                 if ((distanceBetweenThem.x < 6 && distanceBetweenThem.x > -6) && (distanceBetweenThem.z < 6 && distanceBetweenThem.z > -6))
                 {
+                    //Cool down period
                     if (Time.time > nextFire)
                     {
                         effect.Play();
-                        photonView.RPC("Trigger", PhotonTargets.All, "Jump");
+                        photonView.RPC("Trigger", PhotonTargets.All, "Jump"); // notifies network
                         nextFire = Time.time + fireRate;
-                        p.GetComponent<PlayerHealth>().Decrease(10);
-                        impact += -p.transform.forward * 50;
-                        hitc += 1;
-                        netPlay = p;
+                        p.GetComponent<PlayerHealth>().Decrease(10); //decreases health
+                        impact += -p.transform.forward * 50; //to move the person backwards
+                        hitc += 1; // count how many players were hit
+                        netPlay = p; // needed in the case of only one
 
                     }
                 }
@@ -51,9 +55,10 @@ public class BossAI : Photon.MonoBehaviour
         }
         else
         {
+
             Vector3 playerPos = player.transform.position;
             Vector3 AIPos = AI.transform.position;
-            Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
+            Vector3 distanceBetweenThem = AIPos - playerPos;
 
             if ((distanceBetweenThem.x < 6 && distanceBetweenThem.x > -6) && (distanceBetweenThem.z < 6 && distanceBetweenThem.z > -6))
             {
@@ -65,8 +70,6 @@ public class BossAI : Photon.MonoBehaviour
                     player.GetComponent<PlayerHealth>().Decrease(10);
                     impact += -player.transform.forward * 50;
                     hit = true;
-
-
 
                 }
             }
@@ -94,7 +97,7 @@ public class BossAI : Photon.MonoBehaviour
                     GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                     foreach (GameObject p in players)
                     {
-                        p.GetComponent<CharacterController>().Move(impact * Time.deltaTime);
+                        p.GetComponent<CharacterController>().Move(impact * Time.deltaTime);  //moves player backwards
                         impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
                     }
                 }
@@ -104,7 +107,7 @@ public class BossAI : Photon.MonoBehaviour
                 impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
                 
             }
-            if (impact.magnitude < 0.2)
+            if (impact.magnitude < 0.2) //in order to stop the player from going too far back
             {
                 hitc = 0;
             }

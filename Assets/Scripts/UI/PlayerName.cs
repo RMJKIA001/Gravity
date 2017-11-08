@@ -15,16 +15,20 @@ using System.Collections;
         // Store the PlayerPref Key to avoid typos
         static string playerNamePrefKey = "PlayerName";
 
-
+    //buttons
     public Button join;
     public Button create;
+
+    //player name
     public string playername;
         void Start()
         {
 
-
+            //set default
             string defaultName = "";
             InputField _inputField = this.GetComponent<InputField>();
+
+            //get preferred name (remember from previous enter)
             if (_inputField != null)
             {
                 if (PlayerPrefs.HasKey(playerNamePrefKey))
@@ -36,6 +40,7 @@ using System.Collections;
             PhotonNetwork.playerName = defaultName;
         }
 
+        //setter for player name
         public void SetPlayerName()
         {
             playername = GetComponent<InputField>().text;
@@ -46,6 +51,7 @@ using System.Collections;
         PhotonNetwork.ConnectUsingSettings("1");
     }
 
+        //enable buttons once name has been entered
         public void enableButtons()
     {
         join.interactable = true;

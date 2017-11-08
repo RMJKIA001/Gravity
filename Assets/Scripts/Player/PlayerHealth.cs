@@ -19,23 +19,27 @@ public class PlayerHealth : MonoBehaviour
     {
         deadtext.SetActive(false);
     }
+
     //increases health by int i, sting indicates if its from aromor or healthpack 
     public void increase(int i, string from)
     {
         int temp = currhealth + i;
         if (from == "Armor") //allows exta
         {
+            //set health at 130
             if (temp > 130)
             {
                 currhealth = 130;
             }
             else
             {
+                //set new health
                 currhealth = temp;
             }
         }
         else
         {
+            //health cannot go over 100, unless armour used
             if (temp > 100)
             {
                 currhealth = 100;
@@ -50,6 +54,8 @@ public class PlayerHealth : MonoBehaviour
     public void Decrease(int i)
     {
         int temp = currhealth - i;
+
+        //check if player needs to die
         if (temp <= 0)
         {
             //dead
@@ -57,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            //set new health after damage
             currhealth = temp;
         }
     }
@@ -98,6 +105,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            //set things disabled if player dies
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             back.SetActive(true);

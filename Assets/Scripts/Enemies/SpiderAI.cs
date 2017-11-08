@@ -57,15 +57,15 @@ public class SpiderAI : MonoBehaviour, IAI {
         Vector3 playerPos = player.transform.position;
         Vector3 AIPos = AI.transform.position;
         Vector3 distance = AIPos - playerPos;
-
+        //only if in range
         if ((distance.x < 3 && distance.x > -3) && (distance.z < 3 && distance.z > -3))
         {
             if (Time.time > checkTime2)
             {
                 player.GetComponent<PlayerHealth>().Decrease(5);
                // Debug.Log(bite + " " + bite.isVirtual);
-                bite.Play();
-                checkTime2 = Time.time + attacktime;
+                bite.Play(); // play sound
+                checkTime2 = Time.time + attacktime; // cool down
 
             }
         }
@@ -122,10 +122,11 @@ public class SpiderAI : MonoBehaviour, IAI {
 
         if (distance <= range)
         {
-            nav.enabled = true;
+            nav.enabled = true; //only if player in range then activate 
             navi.enabled = true;
            // nav.SetDestination(player.transform.position);
         }
+        // stays activated once player has entered range
 
         Attack();
     }

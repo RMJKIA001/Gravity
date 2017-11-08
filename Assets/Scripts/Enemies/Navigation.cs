@@ -17,11 +17,12 @@ public class Navigation : MonoBehaviour
 	void Update ()
     {
         Find();
-        agent.SetDestination(target.transform.position);
+        agent.SetDestination(target.transform.position); //sets player as the agents target
 	}
 
     void Find()
     {
+        //finds the closest player
         GameObject[] players;
         players = GameObject.FindGameObjectsWithTag("Player");
         GameObject closestPlayer = null;
@@ -39,9 +40,6 @@ public class Navigation : MonoBehaviour
             }
         }
         target = closestPlayer;
-        // Bullet.GetComponent<Bullet>().setPlayer(player);
-
-        //trappedText = player.GetComponentInChildren<Canvas>().GetComponent<CanComp>().Trapped;
 
     }
 }

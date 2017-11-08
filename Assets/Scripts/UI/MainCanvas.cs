@@ -7,6 +7,8 @@ public class MainCanvas : MonoBehaviour {
     [SerializeField]
     private LobbyCanvas _lobbyCanvas;
     public LobbyCanvas LobbyCanvas { get { return _lobbyCanvas; } }
+
+    //instantiate main campus
     void Awake()
     {
         Inst = this;

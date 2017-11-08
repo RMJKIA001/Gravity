@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Collectable : Photon.MonoBehaviour
 {
+    //variables
     public int value;
     public string type;
     public AudioSource effect;
@@ -21,16 +22,19 @@ public class Collectable : Photon.MonoBehaviour
         {
             GameObject playerObj= other.gameObject;
 
+            //check which gun it is
             if (type == "ShotGun" || type == "LazerGun")
             {
                 if(!GunEnabled)
                 {
-                  
+                    //eanable gun if picke up
                     playerObj.GetComponent<GunControls>().enableGun();
                     GunEnabled = true;
                 }
                 if (type == "ShotGun")
                 {
+                    //set active
+                    //update for all players
                     if(playerObj.GetComponent<GunControls>().shotGun==false)
                     {
                         playerObj.GetComponent<GunControls>().shotGun = true;
@@ -49,6 +53,7 @@ public class Collectable : Photon.MonoBehaviour
                         }
                         else
                         {
+                            //play sound effect
                             effect.Play();
                         }
                         gameObject.SetActive(false);
@@ -57,6 +62,8 @@ public class Collectable : Photon.MonoBehaviour
                 }
                 else
                 {
+                    //set active
+                    //show view for both players
                     if(!playerObj.GetComponent<GunControls>().lazerGun)
                     {
                         playerObj.GetComponent<GunControls>().lazerGun = true;
@@ -74,6 +81,7 @@ public class Collectable : Photon.MonoBehaviour
                         }
                         else
                         {
+                            //play sound
                             effect.Play();
                         }
                         gameObject.SetActive(false);
@@ -83,9 +91,14 @@ public class Collectable : Photon.MonoBehaviour
             }//gun
             else
             {
+                //if possible to pick something up
                 bool possible = false;
+
+                //check type
                 if (type == "Health" || type == "Armor")
                 {
+                    //get HUDS
+                    //increase value
                     HUD[] x = playerObj.GetComponentsInChildren<HUD>();    
                     foreach (HUD h in x)
                     {
@@ -100,17 +113,22 @@ public class Collectable : Photon.MonoBehaviour
                        
 
                     }
+                    //perform increase
                     if (possible)
                     {
                         playerObj.GetComponent<PlayerHealth>().increase(value, type);
                     }
                 }
+                //if ammo is picked up
                 else if (type == "Ammo")
                 {                    
+                    //get gun
+                    //and amount of ammo
                     if (playerObj.GetComponentInParent<GunControls>().lazerGun || playerObj.GetComponentInParent<GunControls>().shotGun)
                     {
                         possible = true;
                     }   
+                    //update ammo ammount
                     if (possible)
                     {
                         if(playerObj.GetComponent<GunControls>().active.GetComponent<Shoot>().bullets == playerObj.GetComponent<GunControls>().active.GetComponent<Shoot>().maxBul)
@@ -125,6 +143,8 @@ public class Collectable : Photon.MonoBehaviour
                     }   
                 }
 
+                //for two player
+                //show collection to other player
                 if (possible)
                 {
                     if (PhotonNetwork.connected)
@@ -134,13 +154,17 @@ public class Collectable : Photon.MonoBehaviour
                     }
                     else
                     {
+                        //play sound effect for other players
                         effect.Play();
                     }
+
+                    //show particles for both players
                     particleEffect.transform.position = this.transform.position;
                     pref = gameObject.tag + "Particle";
                     if (PhotonNetwork.connected) { photonView.RPC("DestObj", PhotonTargets.MasterClient, photonView.viewID, gameObject.tag ,pref); }
                     else
                     {
+                        //destroy object on collection
                         gameObject.SetActive(false);
                         
                         Instantiate(particleEffect);
@@ -152,17 +176,20 @@ public class Collectable : Photon.MonoBehaviour
     [PunRPC]
     void Collected(string t,int objId)
     {
+        //get both players
         GameObject[] players = GameObject.FindGameObjectsWithTag(t);
         foreach (GameObject y in players)
         {
             if (y.GetPhotonView().viewID == objId)
             {
+                //play sound effect for both
                 effect.Play();
             }
         }
         
     }
     //destroys the object across the network
+    //remove for both players
     [PunRPC]
     void DestObj(int objId,string t,string prefab)
     {

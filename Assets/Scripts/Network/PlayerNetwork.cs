@@ -2,6 +2,9 @@
 
 public class PlayerNetwork : MonoBehaviour {
 
+    /*
+     starts network and keeps it active
+         */
     public static PlayerNetwork instance;
     public string pname { get; set; }
 
