@@ -47,4 +47,6 @@ MonoBehaviour:
   - shoot
   - Jump
   - scene
+  - Collected
+  - shootSound
   DisableAutoOpenWizard: 1

@@ -28,10 +28,11 @@ public class Collectable : Photon.MonoBehaviour
                 {
                     if (PhotonNetwork.connected)
                     {
-                        if (photonView.isMine)
-                        {
-                             effect.Play();
-                        }
+                      //  if (photonView.isMine)
+                       // {
+                            photonView.RPC("Collected", PhotonTargets.All, gameObject.tag,photonView.viewID);
+                            //effect.Play();
+                        //}
                     }
                     else
                     {
@@ -116,10 +117,11 @@ public class Collectable : Photon.MonoBehaviour
                     //gameObject.GetComponent<AudioSource>().Play();
                     if (PhotonNetwork.connected)
                     {
-                        if (photonView.isMine)
-                    {
-                        effect.Play();
-                    }
+                        //if (photonView.isMine)
+                   // {
+                            photonView.RPC("Collected", PhotonTargets.All,gameObject.tag,photonView.viewID);
+                            //effect.Play();
+                    //}
                 }
                 else
                 {
@@ -138,6 +140,19 @@ public class Collectable : Photon.MonoBehaviour
                 }
             }//not gun
         }//if player
+    }
+    [PunRPC]
+    void Collected(string t,int objId)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag(t);
+        foreach (GameObject y in players)
+        {
+            if (y.GetPhotonView().viewID == objId)
+            {
+                effect.Play();
+            }
+        }
+        
     }
     //destroys the object across the network
     [PunRPC]

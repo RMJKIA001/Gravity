@@ -54,7 +54,7 @@ public class Shoot : MonoBehaviour
                 if ((Input.GetMouseButtonDown(0)) && (time > nextFire) && (bullets > 0))
                 {
                     photonView.RPC("Trigger", PhotonTargets.All, "Shoot"); 
-                    
+                                        
 
                     //Debug.Log(bullets);
                     HUD.GetComponent<HUD>().decrease(1);
@@ -63,13 +63,13 @@ public class Shoot : MonoBehaviour
                     
                     //lightofftime = Time.time + lightofftime;
 
-                    soundeffect.Play();
+                    
                     Vector3 crosshair = myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //middle of the screen
                     RaycastHit hit;
                     //lightsource.SetActive(true);
                     //linedraw.enabled = true;
                     photonView.RPC("shoot", PhotonTargets.All, true, true);
-
+                    photonView.RPC("shootSound", PhotonTargets.All);
 
                     linedraw.SetPosition(0, barrel.position);
 
@@ -157,7 +157,9 @@ public class Shoot : MonoBehaviour
             {
                 y.GetComponent<Animator>().SetTrigger(x);
                 
+
             }
+            //
         }
         
 

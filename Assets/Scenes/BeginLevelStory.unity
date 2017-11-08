@@ -246,14 +246,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\"What? Where am I?\" \n\nYou have awoken in a strange place. Everything
-    about it seems...alien. You\ncannot seem to remember how you got here. \n\nSuddenly
-    you realise you are not alone. Someone else is in the room. But he doesn't\nseem
-    to be human. \n\n\"Take this Human\", says the strange being. \"It is a gravity
+  m_Text: "\"What? Where am I?\" \n\nYou have awoken in a strange place. \nEverything
+    about it seems...alien. \nYou cannot seem to remember how you got here. \n\nSuddenly
+    you realise you are not alone. \nSomeone else is in the room. But he doesn't\nseem
+    to be human. \n\n\"Take this Human\", says the strange being.\n\"It is a gravity
     device which the others left here.\nI cannot bear to see a fellow being in pain.
-    Take it and \nuse it to escape.\" The alien \ndisappears into the shadows. \n\nYou
-    are not sure whether or not to trust this seemingly helpful alien. Regardless,
-    \nyou take the device and get moving.\n"
+    \nTake it and use it to escape.\" \nThe alien disappears into the shadows. \n\nYou
+    are not sure whether or \nnot to trust this seemingly helpful alien. \nRegardless,
+    you take the device and get moving.\n"
 --- !u!222 &1552567395
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215ac9eb57475c247a70a918c12f3adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  end: 0
 --- !u!1 &1812956811
 GameObject:
   m_ObjectHideFlags: 0

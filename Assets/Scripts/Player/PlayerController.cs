@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : Photon.MonoBehaviour {
@@ -66,11 +67,11 @@ public class PlayerController : Photon.MonoBehaviour {
             
             if (PhotonNetwork.connected) {
                 photonView.RPC("MoveObj", PhotonTargets.All, false);
-                photonView.RPC("Jump",PhotonTargets.All,8);
+                photonView.RPC("Jump",PhotonTargets.All,7);
             }
             else
             {
-                jumpSpeed = 8;
+                jumpSpeed = 7;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
                 foreach (GameObject platform in platforms)
                 {
@@ -100,11 +101,11 @@ public class PlayerController : Photon.MonoBehaviour {
             
             if (PhotonNetwork.connected) {
                 photonView.RPC("MoveObj", PhotonTargets.All,true);
-                photonView.RPC("Jump", PhotonTargets.All, 6);
+                photonView.RPC("Jump", PhotonTargets.All, 7);
             }
             else
             {
-                jumpSpeed = 6;
+                jumpSpeed = 7;
                 GameObject[] platforms = GameObject.FindGameObjectsWithTag("GravityPlatform");
 
                 foreach (GameObject platform in platforms)
@@ -129,7 +130,7 @@ public class PlayerController : Photon.MonoBehaviour {
            
         }
         cont.Move(transform.rotation * move * Time.deltaTime);
-        if(Input.GetKeyDown(KeyCode.Escape)) { Application.Quit();}
+        if(Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Menu"); }
     }
     //Synchronises the movement of gravity platforms
     [PunRPC]
@@ -178,6 +179,25 @@ public class PlayerController : Photon.MonoBehaviour {
                 //Debug.Log(" mine");
                 y.GetComponent<GunControls>().active.GetComponent<Shoot>().getLine(g);
                 y.GetComponent<GunControls>().active.GetComponent<Shoot>().lightsource.SetActive(g2);
+               // y.GetComponent<GunControls>().active.GetComponent<Shoot>().soundeffect.Play();
+                break;
+            }
+        }
+
+    }
+    [PunRPC]
+    void shootSound()
+    {
+
+        GameObject[] x = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject y in x)
+        {
+            if (y.GetPhotonView() == this.photonView)
+            {
+                //Debug.Log(" mine");
+                //y.GetComponent<GunControls>().active.GetComponent<Shoot>().getLine(g);
+                //y.GetComponent<GunControls>().active.GetComponent<Shoot>().lightsource.SetActive(g2);
+                y.GetComponent<GunControls>().active.GetComponent<Shoot>().soundeffect.Play();
                 break;
             }
         }

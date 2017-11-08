@@ -86,7 +86,7 @@ public class Hunter : Photon.MonoBehaviour , IAI
         Vector3 AIPos = AI.transform.position;
         Vector3 distanceBetweenThem = AIPos - playerPos;//new Vector3(2, 2, 2);
 
-        if ((distanceBetweenThem.x < 8 && distanceBetweenThem.x > -8) && (distanceBetweenThem.z < 8 && distanceBetweenThem.z > -8))
+        if ((distanceBetweenThem.x < 10 && distanceBetweenThem.x > -10) && (distanceBetweenThem.z < 10 && distanceBetweenThem.z > -10))
         {
             ani.SetBool("Distance", true);
             if (Time.time > nextFire)

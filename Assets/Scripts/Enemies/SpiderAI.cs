@@ -86,7 +86,7 @@ public class SpiderAI : MonoBehaviour, IAI {
 
        
         //check distance
-        if ((distance.x < 3 && distance.x > -3) && (distance.z < 3 && distance.z > -3))
+        if ((distance.x < 5 && distance.x > -5) && (distance.z < 5 && distance.z > -5))
         {
             Attack();
         }
