@@ -203,7 +203,7 @@ MonoBehaviour:
   value: 50
   type: Armor
   effect: {fileID: 0}
-  particleEffect: {fileID: 1337660031807592, guid: c6fcd9f6649689d4d9513661c432749b,
+  particleEffect: {fileID: 1337660031807592, guid: bb8ebf939f61bfc4c8cc680a7c46a978,
     type: 2}
 --- !u!136 &136045455769120392
 CapsuleCollider:

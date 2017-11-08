@@ -5461,7 +5461,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776052257156954}
-  m_LocalRotation: {x: 0.60253173, y: 0.6357236, z: 0.33139423, w: -0.35069796}
+  m_LocalRotation: {x: 0.6025317, y: 0.63572353, z: 0.3313942, w: -0.35069793}
   m_LocalPosition: {x: 0.053405322, y: -2.640539, z: 3.6111143}
   m_LocalScale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
   m_Children:
@@ -5518,7 +5518,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440445525194384}
-  m_LocalRotation: {x: -0.60253173, y: 0.6357236, z: -0.33139426, w: -0.35069793}
+  m_LocalRotation: {x: -0.6025317, y: 0.63572353, z: -0.33139423, w: -0.3506979}
   m_LocalPosition: {x: 0.053405724, y: 2.640539, z: 3.6111143}
   m_LocalScale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
   m_Children:
@@ -6266,7 +6266,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939978226055928}
-  m_LocalRotation: {x: 0.6023934, y: -0.291251, z: 0.53015363, w: 0.5207995}
+  m_LocalRotation: {x: 0.60239345, y: -0.29125103, z: 0.5301537, w: 0.5207996}
   m_LocalPosition: {x: -0.0000001645021, y: -0.000000006373172, z: 0.00000019367957}
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children: []
@@ -6667,7 +6667,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624811769817254}
-  m_LocalRotation: {x: -0.6023933, y: -0.29125124, z: -0.5301537, w: 0.52079964}
+  m_LocalRotation: {x: -0.60239327, y: -0.2912512, z: -0.53015363, w: 0.5207996}
   m_LocalPosition: {x: -0.1406336, y: 0.105552085, z: -0.49395636}
   m_LocalScale: {x: 1.0000001, y: 1, z: 0.99999994}
   m_Children:
@@ -9078,8 +9078,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1196903302719474}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 3.866245, y: 0.00012208223, z: 44.255226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 108.19942, y: 1.710022, z: 51.79953}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4700347663366540}
@@ -9091,7 +9091,7 @@ Transform:
   - {fileID: 224027420752455314}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4768293023611690
 Transform:
   m_ObjectHideFlags: 1
@@ -9124,7 +9124,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1125769032418846}
-  m_LocalRotation: {x: 0.6023934, y: -0.291251, z: 0.53015363, w: 0.5207995}
+  m_LocalRotation: {x: 0.60239345, y: -0.29125103, z: 0.5301537, w: 0.5207996}
   m_LocalPosition: {x: -0.0000001645021, y: -0.000000006373172, z: 0.00000019367957}
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children:
@@ -9963,7 +9963,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231865367381492}
-  m_LocalRotation: {x: 0.6023934, y: -0.291251, z: 0.53015363, w: 0.5207995}
+  m_LocalRotation: {x: 0.60239345, y: -0.29125103, z: 0.5301537, w: 0.5207996}
   m_LocalPosition: {x: -0.0000001645021, y: -0.000000006373172, z: 0.00000019367957}
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children:
@@ -10314,7 +10314,7 @@ MonoBehaviour:
   disableBullet: 0
   trappedeffect: {fileID: 0}
   particles: {fileID: 198666113718794040}
-  range: 0
+  range: 30
   x1: 60
   x2: 40
   x3: 4
@@ -10730,7 +10730,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1196903302719474}
   m_Enabled: 1
-  m_Radius: 8
+  m_Radius: 3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -10798,7 +10798,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 488467547
+  randomSeed: 359510865
   InitialModule:
     serializedVersion: 3
     enabled: 1

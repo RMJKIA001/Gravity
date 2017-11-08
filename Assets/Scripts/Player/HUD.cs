@@ -24,7 +24,7 @@ public class HUD : MonoBehaviour
     public bool increase(int i, string from)
     {
         int temp = used + i;
-        if (used >= total)
+        if (temp > total)
         {
             if (from == "Armor")
             {
@@ -35,6 +35,7 @@ public class HUD : MonoBehaviour
                 if (temp > 130)
                 {
                     used = 130;
+                    //return false;
                 }
                 else
                 {
@@ -45,10 +46,19 @@ public class HUD : MonoBehaviour
             }
             else
             {
+                if(from=="health")
+                {
+                    if (temp > 100)
+                    {
+                        used = 100;
+                        return true;
+                    }
+                }
                 return false;
             }
         }
-        if (temp > total)
+        //if (temp > total)
+        else
         {
             used = total;
         }

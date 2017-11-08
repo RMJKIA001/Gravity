@@ -19,8 +19,8 @@ public class PlayerController : Photon.MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+      //  Cursor.visible = false;
+      //  Cursor.lockState = CursorLockMode.Locked;
         cont = GetComponent<CharacterController>();
         ani = GetComponent<Animator>();
     }
@@ -130,7 +130,8 @@ public class PlayerController : Photon.MonoBehaviour {
            
         }
         cont.Move(transform.rotation * move * Time.deltaTime);
-        if(Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Menu"); }
+        if(Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Menu"); Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None; }
     }
     //Synchronises the movement of gravity platforms
     [PunRPC]
